@@ -1,0 +1,9 @@
+# Local Claude Code skill junction (canonical copy lives in .agents/, tracked via skills-lock.json)
+.claude/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+
+# Dependencies (if a build step is added later)
+node_modules/

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תור-קליק | המערכת לניהול וקביעת תורים למספרות</title>
+  <meta name="description" content="מערכת ניהול תורים מלאה למספרות: לקוחות קובעים תור אונליין תוך שניות, ובעלי מספרות מנהלים יומן, תזכורות, נאמנות והכנסות במקום אחד. 30 יום ניסיון חינם." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="תור-קליק | ניהול וקביעת תורים למספרות" />
+  <meta property="og:description" content="לקוחות קובעים תור אונליין תוך שניות. בעלי מספרות מנהלים הכל מלוח בקרה אחד. 30 יום ניסיון חינם." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+
+  <!-- Favicon (emoji, no asset needed) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9C%82%EF%B8%8F</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="logo">✂ <span>תור-קליק</span></a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#features">יתרונות</a>
+        <a href="#how-it-works">איך זה עובד</a>
+        <a href="#video">הדגמה</a>
+        <a href="#faq">שאלות נפוצות</a>
+      </nav>
+
+      <div class="header-cta">
+        <!-- TODO: update to barber-app.com once custom domain DNS is live -->
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-ghost">כניסה</a>
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary btn-small">התחילו עכשיו</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text reveal">
+        <span class="eyebrow">המערכת לניהול תורים למספרות</span>
+        <h1>נהלו את התורים במספרה — בלי טלפונים, בלי בלבולים</h1>
+        <p class="hero-sub">
+          פלטפורמה מלאה ללקוחות ולבעלי מספרות: קביעת תור אונליין תוך שניות,
+          תזכורות אוטומטיות, ניהול לקוחות ודוחות הכנסות — הכל במקום אחד, גם מהנייד.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary">💇 קביעת תור עכשיו</a>
+          <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-secondary">✂ הצטרפות כבעל/ת מספרה</a>
+        </div>
+
+        <ul class="trust-badges">
+          <li>✓ עובד מצוין מהנייד (אפשר להתקין כאפליקציה)</li>
+          <li>✓ ממשק מלא בעברית, מותאם RTL</li>
+          <li>✓ 30 יום ניסיון חינם לבעלי מספרות</li>
+          <li>✓ ליווי אישי בהקמה</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal">
+        <!-- Phone mockup placeholder — swap inner content for a real screenshot/<img> later -->
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="mock-row mock-header"></div>
+            <div class="mock-card">
+              <div class="mock-line w60"></div>
+              <div class="mock-line w40"></div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-line w70"></div>
+              <div class="mock-line w50"></div>
+            </div>
+            <div class="mock-card mock-card-accent">
+              <div class="mock-line w50 light"></div>
+              <div class="mock-line w30 light"></div>
+            </div>
+            <div class="mock-button"></div>
+          </div>
+        </div>
+        <div class="hero-blob"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Problem ===== -->
+  <section class="section problem">
+    <div class="container">
+      <h2 class="reveal">מוכר לכם?</h2>
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <span class="problem-icon">📵</span>
+          <p>לקוחות מתקשרים בכל שעה כדי לקבוע תור</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="problem-icon">📓</span>
+          <p>פנקס תורים ביד שקל לאבד ולבלבל</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="problem-icon">🙈</span>
+          <p>לקוחות שוכחים תורים — ופספוסים שעולים כסף</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="problem-icon">📊</span>
+          <p>אין לכם מושג כמה הרווחתם החודש</p>
+        </div>
+      </div>
+      <p class="problem-transition reveal">יש דרך הרבה יותר טובה.</p>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="section features" id="features">
+    <div class="container">
+      <h2 class="reveal">כל מה שצריך כדי לנהל מספרה מודרנית</h2>
+      <p class="section-sub reveal">מערכת אחת, הכל כלול — בלי צורך בכמה אפליקציות נפרדות.</p>
+
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <span class="feature-icon">📅</span>
+          <h3>הזמנת תורים אונליין 24/7</h3>
+          <p>הלקוחות בוחרים שירות, תאריך ושעה פנויה — בעצמם, בכל שעה.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">🔔</span>
+          <h3>תזכורות אוטומטיות</h3>
+          <p>מייל, SMS ו-WhatsApp — פחות "לא הגעתי כי שכחתי".</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">🏆</span>
+          <h3>כרטיסיית נאמנות</h3>
+          <p>הנחה קבועה ללקוחות חוזרים אחרי X ביקורים — תמריץ אמיתי לחזור.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">🎁</span>
+          <h3>מערכת הפניות</h3>
+          <p>לקוחות מזמינים חברים ומקבלים קופון הנחה — שיווק שעובד לבד.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">📋</span>
+          <h3>רשימת המתנה חכמה</h3>
+          <p>כשאין מקום פנוי, לקוחות נרשמים להמתנה ואתם יוצרים קשר כשמתפנה תור.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">💰</span>
+          <h3>דוחות הכנסות</h3>
+          <p>תמונה ברורה של ההכנסות שלכם — לפי יום או לפי שירות.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">🕒</span>
+          <h3>שליטה מלאה ביומן</h3>
+          <p>נעלו שעות, הגדירו ימי עבודה ושעות פעילות לכל יום בנפרד.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">📱</span>
+          <h3>גם כאפליקציה</h3>
+          <p>ניתן להתקין על מסך הבית בנייד — בלי חנות אפליקציות, בלי עדכונים.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== How it works ===== -->
+  <section class="section how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="reveal">איך זה עובד?</h2>
+
+      <div class="hiw-grid">
+        <div class="hiw-col reveal">
+          <h3>💇 ללקוחות</h3>
+          <ol>
+            <li><span>1</span>בוחרים מספרה ושירות</li>
+            <li><span>2</span>בוחרים תאריך ושעה פנויה</li>
+            <li><span>3</span>מקבלים אישור ותזכורת — וזהו</li>
+          </ol>
+        </div>
+        <div class="hiw-col reveal">
+          <h3>✂ לבעלי מספרות</h3>
+          <ol>
+            <li><span>1</span>נרשמים ומגדירים שעות פעילות ושירותים</li>
+            <li><span>2</span>שולחים ללקוחות קישור אישי לקביעת תורים</li>
+            <li><span>3</span>מנהלים הכל מלוח בקרה אחד</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Video showcase ===== -->
+  <section class="section video-section" id="video">
+    <div class="container">
+      <h2 class="reveal">צפו איך זה נראה</h2>
+      <p class="section-sub reveal">סרטון קצר שמראה איך לקוח קובע תור, ואיך נראה לוח הבקרה של הספר.</p>
+
+      <div class="video-frame reveal">
+        <!--
+          TODO: replace this placeholder with a real embed, e.g.:
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="הדגמת המערכת"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+          or a self-hosted <video controls poster="assets/poster.jpg"><source src="assets/demo.mp4" type="video/mp4"></video>
+        -->
+        <div class="video-placeholder">
+          <span class="play-btn">▶</span>
+          <p>הסרטון שלכם יופיע כאן</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Testimonials ===== -->
+  <section class="section testimonials">
+    <div class="container">
+      <h2 class="reveal">מה אומרים עלינו</h2>
+      <!-- TODO: replace with real reviews once available -->
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <p class="stars">★★★★★</p>
+          <p class="quote">"הלקוחות שלי קובעים תורים לבד גם בלילה, וכמעט אין יותר 'לא הגעתי'. חסך לי שעות בטלפון כל שבוע."</p>
+          <p class="author">— שם הלקוח, שם המספרה</p>
+        </div>
+        <div class="testimonial-card reveal">
+          <p class="stars">★★★★★</p>
+          <p class="quote">"הקמתי את זה בעצמי תוך כמה דקות, וכרטיסיית הנאמנות גרמה ללקוחות לחזור אליי יותר."</p>
+          <p class="author">— שם הלקוח, שם המספרה</p>
+        </div>
+        <div class="testimonial-card reveal">
+          <p class="stars">★★★★★</p>
+          <p class="quote">"הכל בעברית, נוח, ועובד מצוין מהנייד. בדיוק מה שחיפשתי."</p>
+          <p class="author">— שם הלקוח, שם המספרה</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section faq" id="faq">
+    <div class="container">
+      <h2 class="reveal">שאלות נפוצות</h2>
+
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            כמה זה עולה?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>ניתן להתחיל בתקופת ניסיון חינם של 30 יום, ללא התחייבות וללא צורך בכרטיס אשראי.</p>
+            <!-- TODO: add real pricing details once defined -->
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            האם צריך להתקין משהו?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>לא. המערכת פועלת בדפדפן, וניתן גם להוסיף אותה למסך הבית בנייד כמו אפליקציה רגילה.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            האם המידע שלי מאובטח?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>כן — כל המידע מאוחסן בצורה מאובטחת, וההתחברות למערכת מוצפנת.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            אפשר להתאים את שעות הפעילות שלי?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>בהחלט — לכל יום בשבוע אפשר להגדיר שעות עבודה משלו, כולל ימים סגורים והפסקות.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question">
+            איך הלקוחות שלי יודעים שיש להם תור?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>הם מקבלים אישור מיידי, ותזכורת אוטומטית לפני התור — במייל, SMS או וואטסאפ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Final CTA ===== -->
+  <section class="section final-cta">
+    <div class="container final-cta-inner reveal">
+      <h2>מוכנים להתחיל?</h2>
+      <p>הצטרפו עכשיו — 30 יום ניסיון חינם, ללא כרטיס אשראי.</p>
+      <div class="hero-actions">
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary">💇 קביעת תור עכשיו</a>
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-secondary">✂ הצטרפות כבעל/ת מספרה</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="#top" class="logo">✂ <span>תור-קליק</span></a>
+      <p class="footer-tagline">המערכת לניהול וקביעת תורים למספרות</p>
+      <nav class="footer-nav">
+        <a href="#features">יתרונות</a>
+        <a href="#how-it-works">איך זה עובד</a>
+        <a href="#faq">שאלות נפוצות</a>
+        <a href="https://barber-appointments-vimn.onrender.com">כניסה למערכת</a>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> תור-קליק. כל הזכויות שמורות.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
