@@ -200,6 +200,7 @@
     <div class="container">
       <h2 class="reveal">צפו איך זה נראה</h2>
       <p class="section-sub reveal">סרטון קצר שמראה איך לקוח קובע תור, ואיך נראה לוח הבקרה של הספר.</p>
+      <p class="video-note reveal">בינתיים, עד להכנת סרטון הדמו, שלא יהיה לכם משעמם... 😄</p>
 
       <div class="video-frame reveal">
         <!--
@@ -209,10 +210,9 @@
                   allowfullscreen></iframe>
           or a self-hosted <video controls poster="assets/poster.jpg"><source src="assets/demo.mp4" type="video/mp4"></video>
         -->
-        <div class="video-placeholder">
-          <span class="play-btn">▶</span>
-          <p>הסרטון שלכם יופיע כאן</p>
-        </div>
+        <video controls preload="metadata">
+          <source src="assets/demo.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
