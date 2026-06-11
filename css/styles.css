@@ -1,5 +1,5 @@
 /* ============================================
-   תור-קליק — Landing Page Styles
+   תור-Q — Landing Page Styles
    Premium barbershop aesthetic: charcoal + gold
    ============================================ */
 
@@ -137,6 +137,16 @@ h2 {
   flex-shrink: 0;
 }
 .logo span { color: var(--gold-light); }
+
+.logo-tagline {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-on-dark) !important;
+  opacity: 0.6;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  padding-right: 8px;
+  white-space: nowrap;
+}
 
 .main-nav {
   display: flex;
@@ -636,6 +646,8 @@ h2 {
    Mobile (CSS-only, desktop layout untouched)
    ============================================ */
 @media (max-width: 900px) {
+  .logo-tagline { display: none; }
+
   .hero-inner { grid-template-columns: 1fr; text-align: center; }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
