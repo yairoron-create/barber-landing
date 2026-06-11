@@ -2,6 +2,19 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
+  <!--
+    Existing QR codes / referral links point to this domain with a `?barber=<id>`
+    (and sometimes `&ref=<id>`) query string. If present, redirect straight to the
+    app, preserving the query string, so those links keep working unchanged.
+    Other visitors (incl. ad-campaign traffic with utm_* params) see the landing page.
+  -->
+  <script>
+    (function () {
+      if (new URLSearchParams(window.location.search).has('barber')) {
+        window.location.replace('https://barber-appointments-vimn.onrender.com' + window.location.search);
+      }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>תור-קליק | המערכת לניהול וקביעת תורים למספרות</title>
   <meta name="description" content="מערכת ניהול תורים מלאה למספרות: לקוחות קובעים תור אונליין תוך שניות, ובעלי מספרות מנהלים יומן, תזכורות, נאמנות והכנסות במקום אחד. 30 יום ניסיון חינם." />
@@ -222,11 +235,11 @@
     </div>
   </section>
 
-  <!-- ===== Testimonials ===== -->
+  <!-- ===== Testimonials =====
+  Hidden until we have real customer reviews — placeholder quotes look unprofessional live.
   <section class="section testimonials">
     <div class="container">
       <h2 class="reveal">מה אומרים עלינו</h2>
-      <!-- TODO: replace with real reviews once available -->
       <div class="testimonials-grid">
         <div class="testimonial-card reveal">
           <p class="stars">★★★★★</p>
@@ -246,6 +259,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- ===== FAQ ===== -->
   <section class="section faq" id="faq">
