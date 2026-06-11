@@ -139,10 +139,9 @@ h2 {
 .logo span { color: var(--gold-light); }
 
 .logo-tagline {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--text-on-dark) !important;
-  opacity: 0.6;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   padding-right: 8px;
   white-space: nowrap;
