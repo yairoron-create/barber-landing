@@ -62,14 +62,6 @@ h2 {
   font-size: 18px;
 }
 
-.video-note {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 15px;
-  font-style: italic;
-  margin: -32px auto 32px;
-}
-
 .section { padding: 88px 0; }
 
 /* ===== Buttons ===== */
@@ -401,9 +393,17 @@ h2 {
 /* ===== Video ===== */
 .video-section { background: var(--cream-deep); }
 
-.video-frame {
-  max-width: 860px;
-  margin: 0 auto;
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.video-card-title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 16px;
 }
 
 .video-placeholder {
@@ -434,8 +434,7 @@ h2 {
   box-shadow: 0 10px 30px rgba(212,175,55,0.4);
 }
 
-.video-frame iframe,
-.video-frame video {
+.video-frame iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 0;
@@ -601,6 +600,7 @@ h2 {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .hiw-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {

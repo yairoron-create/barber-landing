@@ -200,19 +200,23 @@
     <div class="container">
       <h2 class="reveal">צפו איך זה נראה</h2>
       <p class="section-sub reveal">סרטון קצר שמראה איך לקוח קובע תור, ואיך נראה לוח הבקרה של הספר.</p>
-      <p class="video-note reveal">בינתיים, עד להכנת סרטון הדמו, שלא יהיה לכם משעמם... 😄</p>
 
-      <div class="video-frame reveal">
-        <!--
-          TODO: replace this placeholder with a real embed, e.g.:
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="הדגמת המערכת"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
-          or a self-hosted <video controls poster="assets/poster.jpg"><source src="assets/demo.mp4" type="video/mp4"></video>
-        -->
-        <video controls preload="metadata">
-          <source src="assets/demo.mp4" type="video/mp4">
-        </video>
+      <div class="video-grid reveal">
+        <div class="video-card">
+          <h3 class="video-card-title">קביעת תור על ידי הלקוח</h3>
+          <div class="video-placeholder">
+            <span class="play-btn">▶</span>
+            <p>הסרטון שלכם יופיע כאן</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <h3 class="video-card-title">לוח הבקרה של הספר</h3>
+          <div class="video-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/bHebCsenWn4?rel=0" title="לוח הבקרה של הספר"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
+        </div>
       </div>
     </div>
   </section>
