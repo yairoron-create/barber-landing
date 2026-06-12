@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    Existing QR codes / referral links point to this domain with a `?barber=<id>`
+    (and sometimes `&ref=<id>`) query string. If present, redirect straight to the
+    app, preserving the query string, so those links keep working unchanged.
+    Other visitors (incl. ad-campaign traffic with utm_* params) see this page.
+  -->
+  <script>
+    (function () {
+      if (new URLSearchParams(window.location.search).has('barber')) {
+        window.location.replace('https://barber-appointments-vimn.onrender.com' + window.location.search);
+      }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תמחור – תור-Q | תוכניות ומחירים לניהול תורים במספרה</title>
+  <meta name="description" content="תוכניות ומחירים למערכת ניהול התורים תור-Q: 30 יום ניסיון חינם, ולאחר מכן תוכנית בייסיק או פרו במחיר נוח, בהתאם לצרכי המספרה שלכם." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="תמחור – תור-Q | תוכניות ומחירים לניהול תורים במספרה" />
+  <meta property="og:description" content="30 יום ניסיון חינם, ולאחר מכן תוכנית בייסיק או פרו במחיר נוח, בהתאם לצרכי המספרה שלכם." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+
+  <!-- Favicon (emoji, no asset needed) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%E2%9C%82%EF%B8%8F</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body id="top">
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html#top" class="logo">✂ <span>תור-<span dir="ltr">Q</span></span><span class="logo-tagline">לניהול תורים במספרה</span></a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html#features">יתרונות</a>
+        <a href="index.html#how-it-works">איך זה עובד</a>
+        <a href="index.html#video">הדגמה</a>
+        <a href="pricing.html">תמחור</a>
+        <a href="index.html#faq">שאלות נפוצות</a>
+      </nav>
+
+      <div class="header-cta">
+        <!-- TODO: update to barber-app.com once custom domain DNS is live -->
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-ghost">כניסה</a>
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary btn-small">התחילו עכשיו</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Pricing ===== -->
+  <section class="section pricing-section" id="pricing">
+    <div class="container">
+      <h1 class="reveal">תוכניות ומחירים</h1>
+      <p class="section-sub reveal">תוכנית לכל ספר (כיסא) במספרה — 30 יום ניסיון חינם בכל תוכנית, ללא כרטיס אשראי וללא התחייבות.</p>
+
+      <p class="pricing-draft-badge reveal">🚧 טיוטה ראשונית — המחירים בעמוד זה עדיין בבדיקה ועשויים להשתנות לפני ההשקה הרשמית</p>
+
+      <div class="pricing-grid reveal">
+        <div class="pricing-card">
+          <h3 class="pricing-name">בייסיק</h3>
+          <p class="pricing-price">59 ₪<span class="pricing-period"> / חודש</span></p>
+          <p class="pricing-desc">מתאים למספרה עצמאית שמתחילה את הדרך הדיגיטלית</p>
+          <ul class="pricing-features">
+            <li>✓ ניהול יומן ותורים</li>
+            <li>✓ עמוד הזמנה אישי ללקוחות</li>
+            <li>✓ כרטיסיית נאמנות דיגיטלית</li>
+            <li>✓ תזכורות אוטומטיות במייל</li>
+            <li>✓ עד 100 תורים בחודש</li>
+          </ul>
+          <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-secondary">התחילו בניסיון חינם</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <span class="pricing-badge">המומלץ ביותר</span>
+          <h3 class="pricing-name">פרו</h3>
+          <p class="pricing-price">99 ₪<span class="pricing-period"> / חודש</span></p>
+          <p class="pricing-desc">למספרות עם תנועת לקוחות גבוהה שרוצות למקסם תזכורות והגעות</p>
+          <ul class="pricing-features">
+            <li>✓ כל מה שיש בתוכנית בייסיק</li>
+            <li>✓ תורים ולקוחות ללא הגבלה</li>
+            <li>✓ תזכורות אוטומטיות גם ב-WhatsApp</li>
+          </ul>
+          <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary">התחילו בניסיון חינם</a>
+        </div>
+      </div>
+
+      <p class="pricing-note reveal">💡 המחיר הוא לכל ספר (כיסא) בנפרד. במספרה עם כמה ספרים — כל ספר נרשם ומשתמש במערכת בנפרד, ומשלם בהתאם.</p>
+
+      <div class="pricing-promo reveal">
+        <p class="pricing-promo-title">🎉 מבצע השקה</p>
+        <p>ל-10 בעלי המספרות הראשונים שיצטרפו — תוכנית פרו במחיר בייסיק (59 ₪) לשנה הראשונה.</p>
+      </div>
+
+      <p class="pricing-note reveal">* בסיום 30 יום הניסיון החינמי ניתן לבחור בתוכנית המתאימה, או לבטל בכל עת בלי עלות.</p>
+    </div>
+  </section>
+
+  <!-- ===== Final CTA ===== -->
+  <section class="section final-cta">
+    <div class="container final-cta-inner reveal">
+      <h2>מוכנים להתחיל?</h2>
+      <p>הצטרפו עכשיו — 30 יום ניסיון חינם, ללא כרטיס אשראי.</p>
+      <div class="hero-actions">
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary">💇 קביעת תור עכשיו</a>
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-secondary">✂ הצטרפות כבעל/ת מספרה</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="index.html#top" class="logo">✂ <span>תור-<span dir="ltr">Q</span></span></a>
+      <p class="footer-tagline">המערכת לניהול וקביעת תורים למספרות</p>
+      <nav class="footer-nav">
+        <a href="index.html#features">יתרונות</a>
+        <a href="index.html#how-it-works">איך זה עובד</a>
+        <a href="pricing.html">תמחור</a>
+        <a href="index.html#faq">שאלות נפוצות</a>
+        <a href="https://barber-appointments-vimn.onrender.com">כניסה למערכת</a>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> תור-<span dir="ltr">Q</span>. כל הזכויות שמורות.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
