@@ -442,6 +442,13 @@ h1, h2 {
   box-shadow: var(--shadow-strong);
 }
 
+.video-frame.video-frame-portrait iframe {
+  aspect-ratio: 9 / 16;
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
+}
+
 /* ===== Pricing ===== */
 .pricing-section { background: var(--cream-deep); }
 
