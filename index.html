@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=4" />
 </head>
 <body id="top">
 
@@ -47,6 +47,7 @@
         <a href="#video">הדגמה</a>
         <a href="pricing.html">מחירים</a>
         <a href="#faq">שאלות נפוצות</a>
+        <a href="#contact">צור קשר</a>
       </nav>
 
       <div class="header-cta">
@@ -302,6 +303,47 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <h2 class="reveal">צור קשר</h2>
+      <p class="section-sub reveal">יש שאלות? נשמח לעזור — נחזור אליך בהקדם.</p>
+
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form reveal" id="contactForm">
+        <input type="hidden" name="access_key" value="8c20c6de-e07a-4065-bd7f-9c286a6631a5" />
+        <input type="hidden" name="subject" value="פנייה חדשה מדף הנחיתה של תור-Q" />
+        <input type="hidden" name="from_name" value="תור-Q Contact Form" />
+        <input type="checkbox" name="botcheck" style="display:none;" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">שם מלא</label>
+            <input type="text" id="contactName" name="name" required placeholder="ישראל ישראלי" />
+          </div>
+          <div class="form-group">
+            <label for="contactPhone">טלפון</label>
+            <input type="tel" id="contactPhone" name="phone" required placeholder="050-0000000" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contactEmail">כתובת מייל</label>
+          <input type="email" id="contactEmail" name="email" required placeholder="israel@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="contactMessage">הודעה</label>
+          <textarea id="contactMessage" name="message" rows="4" required placeholder="כתבו את שאלתכם כאן..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="contactSubmitBtn">שליחה</button>
+
+        <p id="formSuccess" class="form-result form-success" style="display:none;">✓ תודה! ההודעה נשלחה בהצלחה. נחזור אליך בהקדם.</p>
+        <p id="formError" class="form-result form-error" style="display:none;">שגיאה בשליחה. אנא נסה שנית.</p>
+      </form>
     </div>
   </section>
 

@@ -29,6 +29,41 @@ document.querySelectorAll('.faq-item').forEach((item) => {
   });
 });
 
+// ===== Contact form =====
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const successMsg = document.getElementById('formSuccess');
+    const errorMsg = document.getElementById('formError');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'שולח...';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(contactForm)
+      });
+      const data = await res.json();
+      if (data.success) {
+        successMsg.style.display = 'block';
+        errorMsg.style.display = 'none';
+        contactForm.reset();
+        submitBtn.textContent = 'נשלח ✓';
+      } else {
+        throw new Error();
+      }
+    } catch {
+      errorMsg.style.display = 'block';
+      successMsg.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'שליחה';
+    }
+  });
+}
+
 // ===== Scroll reveal animations =====
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(
