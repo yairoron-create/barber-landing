@@ -514,6 +514,13 @@ h1, h2 {
 .form-success { background: #e8f5e9; color: #2e7d32; }
 .form-error   { background: #ffebee; color: #c62828; }
 
+.form-privacy {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0;
+}
+
 /* ===== Pricing ===== */
 .pricing-section { background: var(--cream-deep); }
 
