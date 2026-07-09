@@ -10,7 +10,8 @@
   -->
   <script>
     (function () {
-      if (new URLSearchParams(window.location.search).has('barber')) {
+      var p = new URLSearchParams(window.location.search);
+      if (p.has('barber') || p.has('shop')) {
         window.location.replace('https://barber-appointments-vimn.onrender.com' + window.location.search);
       }
     })();
