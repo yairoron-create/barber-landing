@@ -32,7 +32,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=5" />
+  <link rel="stylesheet" href="css/styles.css?v=6" />
 </head>
 <body id="top">
 
@@ -66,11 +66,17 @@
   <section class="section pricing-section" id="pricing">
     <div class="container">
       <h1 class="reveal">תוכניות ומחירים</h1>
-      <p class="section-sub reveal">תוכנית לכל ספר (כיסא) במספרה — 30 יום ניסיון חינם בתוכנית בייסיק, ללא כרטיס אשראי וללא התחייבות.</p>
+      <p class="section-sub reveal">30 יום ניסיון חינם בתוכנית בייסיק, ללא כרטיס אשראי וללא התחייבות.</p>
 
       <p class="pricing-draft-badge reveal">🚧 טיוטה ראשונית — המחירים בעמוד זה עדיין בבדיקה ועשויים להשתנות לפני ההשקה הרשמית</p>
 
-      <div class="pricing-grid reveal">
+      <div class="pricing-toggle reveal">
+        <button class="toggle-btn active" data-pricing="barber">✂ מספרת שיער</button>
+        <button class="toggle-btn" data-pricing="grooming">🐾 גרומינג לחיות מחמד</button>
+      </div>
+
+      <!-- תמחור מספרת שיער -->
+      <div class="pricing-grid" id="pricing-barber">
         <div class="pricing-card">
           <h3 class="pricing-name">בייסיק</h3>
           <p class="pricing-price">69 ₪<span class="pricing-period"> / חודש</span></p>
@@ -80,7 +86,7 @@
             <li>✓ עמוד הזמנה אישי ללקוחות</li>
             <li>✓ כרטיסיית נאמנות דיגיטלית</li>
             <li>✓ הודעות אוטומטיות במייל (אישור, תזכורת וביטול)</li>
-            <li>✓ עד 200 תורים בחודש</li>
+            <li>✓ עד 150 תורים בחודש</li>
           </ul>
           <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-secondary">התחילו בניסיון חינם</a>
         </div>
@@ -99,12 +105,39 @@
         </div>
       </div>
 
-      <p class="pricing-note reveal">💡 המחיר הוא לכל ספר (כיסא) בנפרד. במספרה עם כמה ספרים — כל ספר נרשם ומשתמש במערכת בנפרד. עובד/ת קבלה שמנהל/ת תורים אינו/ה נחשב/ת כספר ואינו/ה דורש/ת רישיון בתשלום.</p>
+      <p class="pricing-note reveal" id="note-barber">💡 המחיר הוא לכל ספר (כיסא) בנפרד. במספרה עם כמה ספרים — כל ספר נרשם ומשתמש במערכת בנפרד. עובד/ת קבלה שמנהל/ת תורים אינו/ה נחשב/ת כספר ואינו/ה דורש/ת רישיון בתשלום.</p>
 
-      <div class="pricing-promo reveal">
-        <p class="pricing-promo-title">🎉 מבצע השקה</p>
-        <p>ל-5 בעלי המספרות הראשונים שיצטרפו — תוכנית פרו ב-69 ₪ לחודש (828 ₪ לשנה, תשלום מראש), לאחר תקופת הניסיון החינמי.</p>
+      <!-- תמחור גרומינג -->
+      <div class="pricing-grid" id="pricing-grooming" style="display:none;">
+        <div class="pricing-card">
+          <h3 class="pricing-name">בייסיק</h3>
+          <p class="pricing-price">79 ₪<span class="pricing-period"> / חודש</span></p>
+          <p class="pricing-desc">מתאים לסלון גרומינג עצמאי שמתחיל את הדרך הדיגיטלית</p>
+          <ul class="pricing-features">
+            <li>✓ ניהול יומן ותורים</li>
+            <li>✓ עמוד הזמנה אישי ללקוחות</li>
+            <li>✓ כרטיסיית נאמנות דיגיטלית</li>
+            <li>✓ הודעות אוטומטיות במייל (אישור, תזכורת וביטול)</li>
+            <li>✓ עד 150 תורים בחודש</li>
+          </ul>
+          <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-secondary">התחילו בניסיון חינם</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <span class="pricing-badge">המומלץ ביותר</span>
+          <h3 class="pricing-name">פרו</h3>
+          <p class="pricing-price">109 ₪<span class="pricing-period"> / חודש</span></p>
+          <p class="pricing-desc">לסלוני גרומינג עם תנועת לקוחות גבוהה שרוצות למקסם תזכורות והגעות</p>
+          <ul class="pricing-features">
+            <li>✓ כל מה שיש בתוכנית בייסיק</li>
+            <li>✓ תורים ולקוחות ללא הגבלה</li>
+            <li>✓ הודעות אוטומטיות גם ב-WhatsApp (אישור, תזכורת וביטול)</li>
+          </ul>
+          <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary">התחילו בניסיון חינם</a>
+        </div>
       </div>
+
+      <p class="pricing-note reveal" id="note-grooming" style="display:none;">💡 המחיר הוא לכל מטפח/ת בנפרד. בסלון עם כמה מטפחים — כל מטפח/ת נרשמ/ת ומשתמש/ת במערכת בנפרד.</p>
 
       <p class="pricing-note reveal">* בסיום 30 יום הניסיון החינמי ניתן לבחור בתוכנית המתאימה, או לבטל בכל עת בלי עלות.</p>
     </div>

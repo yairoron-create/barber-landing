@@ -29,6 +29,19 @@ document.querySelectorAll('.faq-item').forEach((item) => {
   });
 });
 
+// ===== Pricing toggle =====
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const target = btn.dataset.pricing;
+    document.getElementById('pricing-barber').style.display  = target === 'barber'   ? 'grid' : 'none';
+    document.getElementById('pricing-grooming').style.display = target === 'grooming' ? 'grid' : 'none';
+    document.getElementById('note-barber').style.display      = target === 'barber'   ? 'block' : 'none';
+    document.getElementById('note-grooming').style.display    = target === 'grooming' ? 'block' : 'none';
+  });
+});
+
 // ===== Contact form =====
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {

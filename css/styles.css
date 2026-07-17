@@ -521,6 +521,36 @@ h1, h2 {
   margin: 0;
 }
 
+/* ===== Pricing Toggle ===== */
+.pricing-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  border: 2px solid var(--border-light);
+  border-radius: 999px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  padding: 10px 28px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+}
+
+.toggle-btn.active {
+  background: var(--bg-dark);
+  color: var(--gold);
+}
+
 /* ===== Pricing ===== */
 .pricing-section { background: var(--cream-deep); }
 
