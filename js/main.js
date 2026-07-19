@@ -42,6 +42,12 @@ document.querySelectorAll('.toggle-btn').forEach(btn => {
   });
 });
 
+// ===== Pricing tab from URL param (?tab=grooming) =====
+if (new URLSearchParams(window.location.search).get('tab') === 'grooming') {
+  const groomingBtn = document.querySelector('.toggle-btn[data-pricing="grooming"]');
+  if (groomingBtn) groomingBtn.click();
+}
+
 // ===== Contact form =====
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
