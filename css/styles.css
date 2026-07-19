@@ -556,7 +556,7 @@ h1, h2 {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   margin-top: 40px;
   align-items: stretch;
