@@ -61,7 +61,7 @@ if (requestDemoBtn) {
         ? `${demoText} ${messageField.value}`
         : `${demoText} `;
     }
-    if (subjectField) subjectField.value = 'בקשת הדגמה מדף הנחיתה של תור-Q';
+    if (subjectField) subjectField.value = 'בקשת הדגמה מדף הנחיתה של ‫תור-Q‬';
 
     messageField.scrollIntoView({ behavior: 'smooth', block: 'center' });
     messageField.focus();
