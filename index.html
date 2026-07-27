@@ -391,9 +391,13 @@
       <h2 class="reveal">צור קשר</h2>
       <p class="section-sub reveal">יש שאלות? נשמח לעזור — נחזור אליך בהקדם.</p>
 
+      <div class="demo-request-row reveal">
+        <button type="button" id="requestDemoBtn" class="btn btn-secondary">🎥 מבקש/ת הדגמה</button>
+      </div>
+
       <form action="https://api.web3forms.com/submit" method="POST" class="contact-form reveal" id="contactForm">
         <input type="hidden" name="access_key" value="8c20c6de-e07a-4065-bd7f-9c286a6631a5" />
-        <input type="hidden" name="subject" value="פנייה חדשה מדף הנחיתה של תור-Q" />
+        <input type="hidden" name="subject" id="contactSubject" value="פנייה חדשה מדף הנחיתה של תור-Q" />
         <input type="hidden" name="from_name" value="תור-Q Contact Form" />
         <input type="checkbox" name="botcheck" style="display:none;" />
 

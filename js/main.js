@@ -48,6 +48,27 @@ if (new URLSearchParams(window.location.search).get('tab') === 'grooming') {
   if (groomingBtn) groomingBtn.click();
 }
 
+// ===== Request a demo button =====
+const requestDemoBtn = document.getElementById('requestDemoBtn');
+if (requestDemoBtn) {
+  requestDemoBtn.addEventListener('click', function () {
+    const messageField = document.getElementById('contactMessage');
+    const subjectField = document.getElementById('contactSubject');
+    const demoText = 'אני מבקש/ת לראות הדגמה.';
+
+    if (!messageField.value.startsWith(demoText)) {
+      messageField.value = messageField.value
+        ? `${demoText} ${messageField.value}`
+        : `${demoText} `;
+    }
+    if (subjectField) subjectField.value = 'בקשת הדגמה מדף הנחיתה של תור-Q';
+
+    messageField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    messageField.focus();
+    messageField.setSelectionRange(messageField.value.length, messageField.value.length);
+  });
+}
+
 // ===== Contact form =====
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {

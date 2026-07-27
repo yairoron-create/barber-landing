@@ -452,6 +452,12 @@ h1, h2 {
 /* ===== Contact ===== */
 .contact-section { background: var(--cream); }
 
+.demo-request-row {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
 .contact-form {
   max-width: 640px;
   margin: 0 auto;
