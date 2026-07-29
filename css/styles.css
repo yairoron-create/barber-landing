@@ -584,6 +584,14 @@ h1, h2 {
   box-shadow: var(--shadow-strong);
 }
 
+.pricing-card.coming-soon {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-soft);
+  pointer-events: none;
+}
+
 .pricing-badge {
   position: absolute;
   top: -14px;
@@ -595,6 +603,19 @@ h1, h2 {
   padding: 6px 16px;
   border-radius: 999px;
   box-shadow: 0 6px 16px rgba(212, 175, 55, 0.35);
+}
+
+.pricing-badge-soon {
+  background: linear-gradient(135deg, #b0b0b0, #888);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-disabled {
+  background: #ccc;
+  color: #888;
+  border: 1px solid #bbb;
+  cursor: not-allowed;
 }
 
 .pricing-name { font-size: 22px; margin-bottom: 8px; }
