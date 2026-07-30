@@ -644,6 +644,16 @@ h1, h2 {
 
 .pricing-card .btn { align-self: stretch; text-align: center; }
 
+.pricing-addon-note {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.pricing-addon-note a { color: var(--gold); text-decoration: underline; }
+
 .pricing-promo {
   margin-top: 40px;
   text-align: center;
