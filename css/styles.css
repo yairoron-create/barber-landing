@@ -104,7 +104,7 @@ h1, h2 {
 }
 .btn-ghost:hover { color: var(--gold-light); }
 
-.btn-small { padding: 10px 22px; font-size: 14px; }
+.btn-small { padding: 10px 22px; font-size: 14px; align-self: center; }
 
 /* ===== Header ===== */
 .site-header {
@@ -452,6 +452,13 @@ h1, h2 {
 /* ===== Contact ===== */
 .contact-section { background: var(--cream); }
 
+.contact-no-commit {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: -8px 0 0;
+}
+
 .demo-request-row {
   max-width: 640px;
   margin: 0 auto 28px;
@@ -463,14 +470,16 @@ h1, h2 {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 14px;
 }
+
+.form-row-triple { grid-template-columns: repeat(3, 1fr); }
 
 .form-group {
   display: flex;
@@ -506,7 +515,7 @@ h1, h2 {
 
 .form-group textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 80px;
 }
 
 .form-result {
