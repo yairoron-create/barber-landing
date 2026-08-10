@@ -541,7 +541,7 @@ h1, h2 {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
-  border: 2px solid var(--border-light);
+  border: 2px solid var(--gold-light);
   border-radius: 999px;
   width: fit-content;
   margin-left: auto;
@@ -579,7 +579,7 @@ h1, h2 {
 
 .pricing-card {
   background: #fff;
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--gold-light);
   border-radius: var(--radius);
   padding: 36px 32px;
   box-shadow: var(--shadow-soft);
