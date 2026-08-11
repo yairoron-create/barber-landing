@@ -406,34 +406,6 @@ h1, h2 {
   margin-bottom: 16px;
 }
 
-.video-placeholder {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  color: var(--text-on-dark-muted);
-  box-shadow: var(--shadow-strong);
-}
-
-.video-placeholder .play-btn {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  color: var(--bg-darker);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  box-shadow: 0 10px 30px rgba(212,175,55,0.4);
-}
-
 .video-frame iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -772,14 +744,6 @@ h1, h2 {
   font-weight: 800;
   color: var(--text-on-dark);
   margin-bottom: 16px;
-}
-
-.mb-coming-soon {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-on-dark-muted);
-  text-align: center;
-  margin: 0;
 }
 
 /* ===== Testimonials ===== */
