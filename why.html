@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    Existing QR codes / referral links point to this domain with a `?barber=<id>`
+    (and sometimes `&ref=<id>`) query string. If present, redirect straight to the
+    app, preserving the query string, so those links keep working unchanged.
+    Other visitors (incl. ad-campaign traffic with utm_* params) see this page.
+  -->
+  <script>
+    (function () {
+      if (new URLSearchParams(window.location.search).has('barber')) {
+        window.location.replace('https://barber-appointments-vimn.onrender.com' + window.location.search);
+      }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>למה תור-Q? – עוצרים ביטולים והיעדרויות ברגע האחרון | תור-Q</title>
+  <meta name="description" content="ביטולים ברגע האחרון ולקוחות שלא מגיעים עולים לכם כסף. הנה איך תור-Q עוצרת את זה — בקצרה: סף ביטול, אישור הגעה, פיקדון, תזכורות ורשימת המתנה." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="למה תור-Q? – עוצרים ביטולים והיעדרויות ברגע האחרון" />
+  <meta property="og:description" content="ביטולים ברגע האחרון ולקוחות שלא מגיעים עולים לכם כסף. הנה איך תור-Q עוצרת את זה — בקצרה." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+  <meta property="og:url" content="https://barber-app.com/why.html" />
+
+  <link rel="canonical" href="https://barber-app.com/why.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css?v=10" />
+</head>
+<body id="top">
+
+  <!-- ===== Header / Nav ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html#top" class="logo">✂ <span>תור-<span dir="ltr">Q</span></span><span class="logo-tagline">לניהול תורים במספרה</span></a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html#features">יתרונות</a>
+        <a href="index.html#how-it-works">איך זה עובד</a>
+        <a href="index.html#video">הדגמה</a>
+        <a href="pricing.html">מחירים</a>
+        <a href="index.html#faq">שאלות נפוצות</a>
+        <a href="index.html#contact">צור קשר</a>
+      </nav>
+
+      <div class="header-cta">
+        <!-- TODO: update to barber-app.com once custom domain DNS is live -->
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-ghost">כניסה</a>
+        <a href="https://barber-appointments-vimn.onrender.com" class="btn btn-primary btn-small">התחילו עכשיו</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero hero-solo">
+    <div class="container hero-inner">
+      <div class="hero-text reveal">
+        <span class="eyebrow">💈🐾 לספרים, למספרות ולסלוני טיפוח לחיות מחמד</span>
+        <h1>כמה תורים התבטלו לכם השבוע ברגע האחרון?</h1>
+        <p class="hero-sub">
+          תור-Q עוזרת לכם למנוע ביטולים ברגע האחרון, למלא תורים שהתפנו תוך דקות,
+          ולוודא שלקוח שקבע תור — גם באמת מגיע.
+        </p>
+
+        <div class="hero-actions">
+          <a href="index.html#contact" class="btn btn-primary">🎥 לתיאום הדגמה</a>
+          <a href="https://wa.me/972535658451" target="_blank" rel="noopener" class="btn btn-secondary">💬 וואטסאפ ישיר</a>
+          <a href="pricing.html" class="btn btn-secondary">לצפייה בתמחור</a>
+        </div>
+
+        <ul class="trust-badges">
+          <li>⏰ סף ביטול לבחירה</li>
+          <li>✅ אישור הגעה בלחיצה אחת</li>
+          <li>📋 רשימת המתנה חכמה</li>
+          <li>📲 תזכורות במייל וב-WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Problem ===== -->
+  <section class="section problem">
+    <div class="container">
+      <h2 class="reveal">אתם כבר מכירים את התחושה</h2>
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <span class="problem-icon">⏰</span>
+          <p>לקוח מבטל שעה לפני התור — וכבר אין שום סיכוי למלא את החלון הזה</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="problem-icon">🚫</span>
+          <p>לקוח פשוט לא מגיע ולא עונה — והכיסא נשאר ריק כל התור</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="problem-icon">💸</span>
+          <p>כל תור ריק הוא הכנסה שלא תחזור, ויום עבודה שלא נוצל עד הסוף</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="problem-icon">🤷</span>
+          <p>אין לכם דרך לדעת מי מהלקוחות מבטל כל הזמן</p>
+        </div>
+      </div>
+      <p class="problem-transition reveal">תור-Q נבנתה בדיוק בשביל לעצור את זה.</p>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="section features">
+    <div class="container">
+      <h2 class="reveal">איך תור-Q עוצרת את זה</h2>
+      <p class="section-sub reveal">לא עוד תזכורת סתם — כלים שעוצרים ביטולים לפני שהם קורים, ומצילים את מה שכבר קרה.</p>
+
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <span class="feature-icon">⏰</span>
+          <h3>חסימת ביטול ברגע האחרון</h3>
+          <p>קובעים מראש כמה שעות לפני התור אי אפשר יותר לבטל או לשנות מועד (<span dir="ltr">6 / 12 / 24 / 48</span> שעות) — הלקוח פשוט לא יכול לעשות את זה ברגע האחרון.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">✅</span>
+          <h3>אישור הגעה בלחיצה אחת</h3>
+          <p>בתזכורת שנשלחת יום לפני, הלקוח לוחץ "מגיע/ה" — ואתם יודעים בוודאות מי באמת יגיע.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">💰</span>
+          <h3>פיקדון מראש לתורים רגישים</h3>
+          <p>אפשר לדרוש פיקדון על תור כדי להרתיע ביטולים והיעדרויות — בתיאום טלפוני מולכם, לפי שיקול דעתכם.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">📲</span>
+          <h3>תזכורות אוטומטיות בכל ערוץ</h3>
+          <p>מייל ו-WhatsApp נשלחים אוטומטית — הלקוח מקבל תזכורת בערוץ שהוא באמת קורא.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">📋</span>
+          <h3>רשימת המתנה חכמה</h3>
+          <p>תור התפנה בגלל ביטול? המערכת מראה מיד למי כדאי להתקשר מרשימת ההמתנה.</p>
+        </div>
+        <div class="feature-card reveal">
+          <span class="feature-icon">📝</span>
+          <h3>זיהוי לקוחות בעייתיים</h3>
+          <p>סימון אוטומטי של לקוחות שמבטלים הרבה, הערות פנימיות לצוות, ואפשרות לחסום לקוח לגמרי.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Compare ===== -->
+  <section class="section how-it-works">
+    <div class="container">
+      <h2 class="reveal">ההבדל בשטח</h2>
+      <div class="compare-grid">
+        <div class="compare-col compare-bad reveal">
+          <h3>😩 בלי תור-Q</h3>
+          <ul>
+            <li><span>❌</span>לקוח מבטל 20 דקות לפני התור</li>
+            <li><span>❌</span>אתם מגלים שהוא לא מגיע רק כשהוא לא מגיע</li>
+            <li><span>❌</span>התור נשאר ריק, אין למי להתקשר</li>
+            <li><span>❌</span>אין לכם מושג מי מבטל כל הזמן</li>
+          </ul>
+        </div>
+        <div class="compare-col compare-good reveal">
+          <h3>😌 עם תור-Q</h3>
+          <ul>
+            <li><span>✅</span>אי אפשר לבטל מתחת לסף שקבעתם מראש</li>
+            <li><span>✅</span>אתם יודעים כבר אתמול בערב מי מאשר הגעה</li>
+            <li><span>✅</span>רשימת ההמתנה ממלאת את התור תוך דקות</li>
+            <li><span>✅</span>לקוחות בעייתיים מסומנים אוטומטית</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Final CTA ===== -->
+  <section class="section final-cta">
+    <div class="container final-cta-inner reveal">
+      <h2>רוצה לראות איך זה עוצר ביטולים אצלכם?</h2>
+      <p>15 דקות שיחה, הדגמה חיה על מסך אמיתי — בלי התחייבות.</p>
+      <div class="hero-actions">
+        <a href="index.html#contact" class="btn btn-primary">🎥 לתיאום הדגמה</a>
+        <a href="https://wa.me/972535658451" target="_blank" rel="noopener" class="btn btn-secondary">💬 וואטסאפ ישיר</a>
+        <a href="pricing.html" class="btn btn-secondary">לצפייה בתמחור</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="index.html#top" class="logo">✂ <span>תור-<span dir="ltr">Q</span></span></a>
+      <p class="footer-tagline">המערכת לניהול וקביעת תורים למספרות</p>
+      <nav class="footer-nav">
+        <a href="index.html#features">יתרונות</a>
+        <a href="index.html#how-it-works">איך זה עובד</a>
+        <a href="pricing.html">מחירים</a>
+        <a href="index.html#faq">שאלות נפוצות</a>
+        <a href="https://barber-appointments-vimn.onrender.com">כניסה למערכת</a>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> תור-<span dir="ltr">Q</span>. כל הזכויות שמורות.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=9"></script>
+</body>
+</html>
