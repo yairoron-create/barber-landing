@@ -34,7 +34,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/styles.css?v=11" />
+  <link rel="stylesheet" href="css/styles.css?v=13" />
 </head>
 <body id="top">
 
@@ -91,16 +91,27 @@
 
       <div class="hero-visual reveal">
         <div class="hero-blob"></div>
+        <div class="notif-visual-col">
+        <div class="vtoggle-wrap" id="vtoggle">
+          <button type="button" class="vtoggle-btn active" data-vertical="barber">✂ מספרה</button>
+          <button type="button" class="vtoggle-btn" data-vertical="grooming">🐾 טיפוח לחיות מחמד</button>
+        </div>
         <div class="notif-stack">
           <div class="notif-card notif-back">
             <div class="notif-head">🎟️ הודעה ללקוח</div>
             <div class="notif-body">מזל טוב! זכית בכרטיס הנחה לתור הבא שלך 🎉</div>
           </div>
-          <div class="notif-card notif-front">
+          <div class="notif-card notif-front" id="notif-front-barber">
             <div class="notif-head">🔔 תזכורת לתור מחר</div>
             <div class="notif-body">היי דנה, מזכירים שיש לך תור מחר ב-14:30 אצל יוסי ✂️</div>
             <div class="notif-btn">✅ אשר/י שתגיע/י לתור</div>
           </div>
+          <div class="notif-card notif-front" id="notif-front-grooming" style="display:none;">
+            <div class="notif-head">🔔 תזכורת לתור מחר</div>
+            <div class="notif-body">היי דנה, מזכירים שיש לרקסי תור טיפוח מחר ב-14:30 אצל ענת 🐩</div>
+            <div class="notif-btn">✅ אשר/י שתגיע/י לתור</div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -230,5 +241,25 @@
   </footer>
 
   <script src="js/main.js?v=9"></script>
+  <script>
+    // ===== Hero vertical toggle (barber / pet grooming) — scoped to this page only,
+    // deliberately not added to main.js so it never collides with pricing.html's
+    // own .toggle-btn/#pricing-barber handler when this script runs alongside it.
+    (function () {
+      function setVertical(vertical) {
+        document.querySelectorAll('.vtoggle-btn').forEach(function (b) {
+          b.classList.toggle('active', b.dataset.vertical === vertical);
+        });
+        document.getElementById('notif-front-barber').style.display = vertical === 'barber' ? 'block' : 'none';
+        document.getElementById('notif-front-grooming').style.display = vertical === 'grooming' ? 'block' : 'none';
+      }
+      document.querySelectorAll('.vtoggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { setVertical(btn.dataset.vertical); });
+      });
+      if (new URLSearchParams(window.location.search).get('tab') === 'grooming') {
+        setVertical('grooming');
+      }
+    })();
+  </script>
 </body>
 </html>

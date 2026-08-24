@@ -282,6 +282,14 @@ h1, h2 {
 }
 
 /* ----- Reminder-notification card mockup (hero visual, no real screenshot) ----- */
+.notif-visual-col {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .notif-stack {
   position: relative;
   z-index: 1;
@@ -576,8 +584,8 @@ h1, h2 {
   margin: 0;
 }
 
-/* ===== Pricing Toggle ===== */
-.pricing-toggle {
+/* ===== Pricing Toggle (also reused by the hero vertical-toggle on why.html) ===== */
+.pricing-toggle, .vtoggle-wrap {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
@@ -589,7 +597,7 @@ h1, h2 {
   overflow: hidden;
 }
 
-.toggle-btn {
+.toggle-btn, .vtoggle-btn {
   padding: 10px 28px;
   border: none;
   background: transparent;
@@ -601,9 +609,17 @@ h1, h2 {
   transition: background var(--transition), color var(--transition);
 }
 
-.toggle-btn.active {
+.toggle-btn.active, .vtoggle-btn.active {
   background: var(--bg-dark);
   color: var(--gold);
+}
+
+/* ----- Vertical-toggle sits on the dark hero, needs its own contrast ----- */
+.vtoggle-wrap { margin: 0 0 18px; }
+.vtoggle-btn { color: var(--text-on-dark-muted); }
+.vtoggle-btn.active {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--bg-darker);
 }
 
 /* ===== Pricing ===== */
