@@ -489,6 +489,11 @@ h1, h2 {
    line below the landscape pair. */
 .video-card-full {
   grid-column: 1 / -1;
+  /* #video-guest (the FAQ deep link) targets this element directly, well past
+     .section's own 88px top padding that every other anchor link relies on to
+     clear the sticky 72px .site-header — without this, the jump lands the
+     card right under the header. Matches .section's own padding value. */
+  scroll-margin-top: 88px;
 }
 
 .video-frame iframe {
