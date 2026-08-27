@@ -482,6 +482,15 @@ h1, h2 {
   margin-bottom: 16px;
 }
 
+/* A portrait (9:16) card sitting alongside 16:9 cards in the same equal-width
+   grid would either get stretched to an awkward landscape-ish column width or
+   leave a bare empty cell next to it. Spans the full grid row instead, so the
+   already-narrower/centered .video-frame-portrait iframe just sits on its own
+   line below the landscape pair. */
+.video-card-full {
+  grid-column: 1 / -1;
+}
+
 .video-frame iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
