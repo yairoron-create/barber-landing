@@ -1012,7 +1012,50 @@ h1, h2 {
 }
 .footer-nav a:hover { color: var(--gold-light); }
 
+.footer-legal-nav { font-size: 13px; margin: 4px 0 0; }
+.footer-legal-nav a { color: var(--text-on-dark-muted); text-decoration: underline; }
+.footer-legal-nav a:hover { color: var(--gold-light); }
+
 .footer-copy { font-size: 13px; margin: 8px 0 0; opacity: 0.7; }
+
+/* ===== Legal pages (Privacy / Terms) ===== */
+.legal-updated {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: -24px 0 48px;
+}
+
+.legal-content { max-width: 760px; margin: 0 auto; }
+
+.legal-intro {
+  background: var(--cream-deep);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 0 0 40px;
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.legal-content h2 {
+  font-size: 20px;
+  text-align: right;
+  margin: 40px 0 12px;
+}
+
+.legal-content h2:first-of-type { margin-top: 0; }
+
+.legal-content p { margin: 0 0 16px; }
+
+.legal-content ul {
+  margin: 0 0 16px;
+  padding-inline-start: 22px;
+}
+
+.legal-content li { margin-bottom: 8px; }
+
+.legal-content a { color: inherit; text-decoration: underline; }
 
 /* ===== Scroll reveal ===== */
 .reveal {
