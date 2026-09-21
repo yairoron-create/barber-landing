@@ -334,6 +334,7 @@
       <div class="vcard-preview-label">כך תיראה רשומה אחת בקובץ שייווצר:</div>
       <pre id="vcard-sample"><code>BEGIN:VCARD
 VERSION:3.0
+N:לקוח-דנה כהן;;;;
 FN:לקוח-דנה כהן
 TEL;TYPE=CELL:+972501234567
 END:VCARD</code></pre>
@@ -367,7 +368,8 @@ END:VCARD</code></pre>
 
     <ol class="os-steps" id="os-steps-ios">
       <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
-      <li>בדרך כלל ייפתח מיד מסך "הוספת אנשי קשר" עם כל הרשימה בבת אחת — מאשרים. אם במקום זה הקובץ רק ירד, פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים אותו תחת "הורדות" ונוגעים בו.</li>
+      <li>ייפתח מסך "הוספת איש קשר" של iOS. לוחצים על <strong>הסימן הכחול ✓</strong> למעלה כדי לאשר את ההוספה.</li>
+      <li>חשוב: אנשי הקשר <strong>מתווספים ישירות לאפליקציית "אנשי קשר"</strong> — לא נשמר קובץ באפליקציית "קבצים". כדי לוודא שההוספה הצליחה, פותחים את אפליקציית <strong>אנשי קשר</strong> ומחפשים לפי הקידומת.</li>
       <li>פותחים וואטסאפ ← צ'אטים חדשים ← <strong>רשימת תפוצה חדשה</strong> ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה (הם יופיעו ברצף אחד).</li>
     </ol>
     <ol class="os-steps" id="os-steps-android" hidden>
@@ -447,9 +449,17 @@ END:VCARD</code></pre>
   }
 
   function buildVCardBlock(fullName, phone){
+    // vCard 3.0 technically requires N (structured name) alongside FN, not just FN alone.
+    // iOS's own contact importer is strict about this: a preview screen can still render
+    // an FN-only card leniently, but tapping "add" silently fails to actually create the
+    // contact, and a multi-record file can stop being recognized after the first record.
+    // We only have one free-text "full name" (no separate first/last), so the whole name
+    // goes in N's family-name slot — any non-empty N satisfies the requirement.
+    var escaped = escapeVCardText(fullName);
     return 'BEGIN:VCARD\r\n' +
       'VERSION:3.0\r\n' +
-      'FN:' + escapeVCardText(fullName) + '\r\n' +
+      'N:' + escaped + ';;;;\r\n' +
+      'FN:' + escaped + '\r\n' +
       'TEL;TYPE=CELL:' + phone + '\r\n' +
       'END:VCARD\r\n';
   }
@@ -508,7 +518,7 @@ END:VCARD</code></pre>
   function renderSample(prefix){
     var sampleName = escapeVCardText((prefix || '') + 'דנה כהן');
     els.vcardSample.querySelector('code').textContent =
-      'BEGIN:VCARD\nVERSION:3.0\nFN:' + sampleName + '\nTEL;TYPE=CELL:+972501234567\nEND:VCARD';
+      'BEGIN:VCARD\nVERSION:3.0\nN:' + sampleName + ';;;;\nFN:' + sampleName + '\nTEL;TYPE=CELL:+972501234567\nEND:VCARD';
   }
 
   function resetGeneratedFile(){
