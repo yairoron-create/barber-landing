@@ -524,7 +524,10 @@ END:VCARD</code></pre>
     els.downloadLink.hidden = true;
     els.generateStatus.hidden = true;
     els.fallbackCopy.hidden = true;
-    if (lastObjectUrl){ URL.revokeObjectURL(lastObjectUrl); lastObjectUrl = null; }
+    // Only a blob: URL needs (and can be) revoked — a data: URI has no associated
+    // resource to release.
+    if (lastObjectUrl && lastObjectUrl.indexOf('blob:') === 0){ URL.revokeObjectURL(lastObjectUrl); }
+    lastObjectUrl = null;
   }
 
   function refresh(){
@@ -622,15 +625,20 @@ END:VCARD</code></pre>
     // was tried and reverted: it did force a real file save to Files instead of an
     // in-page preview, but broke the file's recognized vCard type for OTHER apps (Gmail's
     // own attach picker rejected the resulting file as "invalid" when re-sharing it), and
-    // — confirmed live — didn't even fix the actual underlying problem: opened from
-    // Files this way, iOS's own Quick Look still only ever showed one contact out of a
-    // multi-record file, same as the plain blob-preview path. That "only the first/last
-    // record shows" behavior appears to be a genuine iOS Quick Look limitation for
-    // multi-vCard files, independent of MIME type — not something fixable from here.
+    // — confirmed live — didn't even fix the actual underlying problem either way.
+    //
+    // A data: URI is used instead of blob: (createObjectURL) — confirmed live that even
+    // with a spec-correct vCard (N field present), navigating to a text/vcard blob: URL
+    // opens iOS's native "Add Contact" preview but tapping its own confirm checkmark adds
+    // nothing to Contacts at all — a dead end regardless of vCard content. blob: is a
+    // newer, browser-internal URL scheme with a real history of inconsistent handling in
+    // Safari specifically (unlike the much older, more uniformly-supported data: scheme),
+    // so this is worth trying as a genuinely different code path, not just a cosmetic
+    // change — still 100% client-side, nothing sent to any server.
     try {
-      var blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
-      lastObjectUrl = URL.createObjectURL(blob);
-      els.downloadLink.href = lastObjectUrl;
+      var dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(content);
+      lastObjectUrl = dataUrl;
+      els.downloadLink.href = dataUrl;
       els.downloadLink.hidden = false;
 
       var importStepNum = document.getElementById('import-step-num').textContent;
