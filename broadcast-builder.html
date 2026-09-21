@@ -621,24 +621,22 @@ END:VCARD</code></pre>
     // genuine user-initiated navigation everywhere, so we reveal one instead of
     // auto-clicking it.
     //
-    // MIME type is text/vcard, NOT application/octet-stream — application/octet-stream
-    // was tried and reverted: it did force a real file save to Files instead of an
-    // in-page preview, but broke the file's recognized vCard type for OTHER apps (Gmail's
-    // own attach picker rejected the resulting file as "invalid" when re-sharing it), and
-    // — confirmed live — didn't even fix the actual underlying problem either way.
+    // Confirmed live, across every combination tried (blob: + text/vcard with a real tap,
+    // blob: + text/vcard auto-clicked, data: + text/vcard, with and without the vCard's
+    // required N field): navigating straight to vcard-typed content opens iOS's own
+    // "Add Contact" Quick Look preview, but its confirm action never actually writes
+    // anything to Contacts, and a multi-record file only ever shows one card. This looks
+    // like a real, unfixable-from-here iOS restriction on web-page-originated content.
     //
-    // A data: URI is used instead of blob: (createObjectURL) — confirmed live that even
-    // with a spec-correct vCard (N field present), navigating to a text/vcard blob: URL
-    // opens iOS's native "Add Contact" preview but tapping its own confirm checkmark adds
-    // nothing to Contacts at all — a dead end regardless of vCard content. blob: is a
-    // newer, browser-internal URL scheme with a real history of inconsistent handling in
-    // Safari specifically (unlike the much older, more uniformly-supported data: scheme),
-    // so this is worth trying as a genuinely different code path, not just a cosmetic
-    // change — still 100% client-side, nothing sent to any server.
+    // Back to application/octet-stream — the one variant confirmed to actually save a
+    // real file to the Files app (not just open a broken preview). Sharing that file via
+    // Gmail failed (Gmail's own attach picker rejected it), but Gmail is a third-party
+    // app doing its own validation — Messages (first-party, and known to correctly handle
+    // multi-vCard attachments) hasn't been tried yet as the sharing channel.
     try {
-      var dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(content);
-      lastObjectUrl = dataUrl;
-      els.downloadLink.href = dataUrl;
+      var blob = new Blob([content], { type: 'application/octet-stream' });
+      lastObjectUrl = URL.createObjectURL(blob);
+      els.downloadLink.href = lastObjectUrl;
       els.downloadLink.hidden = false;
 
       var importStepNum = document.getElementById('import-step-num').textContent;
