@@ -367,9 +367,8 @@ END:VCARD</code></pre>
     </div>
 
     <ol class="os-steps" id="os-steps-ios">
-      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו — הקובץ יורד למכשיר.</li>
-      <li>פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים את הקובץ — בדרך כלל תחת "הורדות".</li>
-      <li>נוגעים בקובץ — ייפתח מסך עם כל אנשי הקשר שבקובץ בבת אחת. בוחרים <strong>הוספת כל אנשי הקשר</strong> (או מאשרים בסימן הכחול ✓).</li>
+      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
+      <li>בדרך כלל ייפתח מיד מסך "הוספת איש קשר". מאשרים בסימן הכחול ✓ למעלה. אם במקום זה הקובץ רק ירד, פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים אותו תחת "הורדות" ונוגעים בו.</li>
       <li>פותחים וואטסאפ ← צ'אטים חדשים ← <strong>רשימת תפוצה חדשה</strong> ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה (הם יופיעו ברצף אחד).</li>
     </ol>
     <ol class="os-steps" id="os-steps-android" hidden>
@@ -619,16 +618,17 @@ END:VCARD</code></pre>
     // genuine user-initiated navigation everywhere, so we reveal one instead of
     // auto-clicking it.
     //
-    // MIME type is deliberately application/octet-stream, NOT text/vcard — confirmed live
-    // that a text/vcard blob makes iOS Safari open its own built-in "Quick Look"-style
-    // contact preview directly from the blob: URL, but that preview turned out to be
-    // read-only: tapping its own confirm checkmark added nothing to Contacts, and a
-    // multi-contact file only ever surfaced the first record. Serving an unrecognized
-    // binary type instead stops Safari from intercepting it for that broken preview and
-    // makes it save a real file to the Files app — opening a REAL file (not a blob: URL)
-    // is what actually triggers iOS's fully-functional multi-contact import screen.
+    // MIME type is text/vcard, NOT application/octet-stream — application/octet-stream
+    // was tried and reverted: it did force a real file save to Files instead of an
+    // in-page preview, but broke the file's recognized vCard type for OTHER apps (Gmail's
+    // own attach picker rejected the resulting file as "invalid" when re-sharing it), and
+    // — confirmed live — didn't even fix the actual underlying problem: opened from
+    // Files this way, iOS's own Quick Look still only ever showed one contact out of a
+    // multi-record file, same as the plain blob-preview path. That "only the first/last
+    // record shows" behavior appears to be a genuine iOS Quick Look limitation for
+    // multi-vCard files, independent of MIME type — not something fixable from here.
     try {
-      var blob = new Blob([content], { type: 'application/octet-stream' });
+      var blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
       lastObjectUrl = URL.createObjectURL(blob);
       els.downloadLink.href = lastObjectUrl;
       els.downloadLink.hidden = false;
@@ -636,7 +636,7 @@ END:VCARD</code></pre>
       var importStepNum = document.getElementById('import-step-num').textContent;
       els.generateStatus.hidden = false;
       els.generateStatus.className = 'generate-status status-ok';
-      els.generateStatus.textContent = '✓ הקובץ מוכן — לחצו על הכפתור הירוק שהופיע כדי להוריד אותו לטלפון, ואז המשיכו לשלב ' + importStepNum + ' למטה כדי לפתוח אותו ולייבא את אנשי הקשר.';
+      els.generateStatus.textContent = '✓ הקובץ מוכן — לחצו על הכפתור הירוק שהופיע כדי לפתוח/להוריד אותו, ואז המשיכו לשלב ' + importStepNum + ' למטה.';
     } catch (err){
       showFallback(content);
     }
