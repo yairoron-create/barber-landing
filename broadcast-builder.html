@@ -217,6 +217,7 @@
   }
   .btn-primary:disabled{opacity:.5; cursor:not-allowed;}
   .btn-primary:not(:disabled):active{transform:scale(.98);}
+  a.btn-primary{display:block; text-align:center; text-decoration:none; box-sizing:border-box; margin-top:10px;}
 
   .btn-secondary{
     border:1px solid var(--line); border-radius:10px;
@@ -342,6 +343,7 @@ END:VCARD</code></pre>
   <section class="card step" id="step-generate">
     <div class="step-head"><span class="step-num" id="generate-step-num">3</span><h2>יצירת קובץ אנשי הקשר</h2></div>
     <button id="generate-btn" class="btn-primary" disabled>העלו קובץ קודם</button>
+    <a id="download-link" class="btn-primary" href="#" download="אנשי-קשר-לוואטסאפ.vcf" hidden>⬇️ קובץ מוכן — לחצו כאן לפתיחה/הורדה</a>
     <p class="generate-status" id="generate-status" hidden></p>
 
     <div class="fallback-copy" id="fallback-copy" hidden>
@@ -355,7 +357,7 @@ END:VCARD</code></pre>
     <div class="step-head"><span class="step-num" id="import-step-num">4</span><h2>ייבוא לטלפון ובניית רשימת התפוצה</h2></div>
 
     <div class="note-box">
-      💡 הקובץ שיורד בשלב הקודם הוא קובץ אנשי קשר מוכן לייבוא (<code>.vcf</code>) — אין צורך לשנות סיומת או שם קובץ.
+      💡 הקובץ שנוצר בשלב הקודם הוא קובץ אנשי קשר מוכן לייבוא (<code>.vcf</code>) — אין צורך לשנות סיומת או שם קובץ.
     </div>
 
     <div class="os-tabs" role="tablist">
@@ -364,14 +366,13 @@ END:VCARD</code></pre>
     </div>
 
     <ol class="os-steps" id="os-steps-ios">
-      <li>לאחר הלחיצה על "צרו קובץ אנשי קשר" למעלה, קובץ בשם <code>אנשי-קשר-לוואטסאפ.vcf</code> יורד למכשיר.</li>
-      <li>פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים את הקובץ — בדרך כלל תחת "הורדות".</li>
-      <li>נוגעים בקובץ — ייפתח מסך "הוספת אנשי קשר" עם כל הרשימה בבת אחת. מאשרים.</li>
+      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
+      <li>בדרך כלל ייפתח מיד מסך "הוספת אנשי קשר" עם כל הרשימה בבת אחת — מאשרים. אם במקום זה הקובץ רק ירד, פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים אותו תחת "הורדות" ונוגעים בו.</li>
       <li>פותחים וואטסאפ ← צ'אטים חדשים ← <strong>רשימת תפוצה חדשה</strong> ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה (הם יופיעו ברצף אחד).</li>
     </ol>
     <ol class="os-steps" id="os-steps-android" hidden>
-      <li>לאחר הלחיצה על "צרו קובץ אנשי קשר" למעלה, קובץ בשם <code>אנשי-קשר-לוואטסאפ.vcf</code> יורד למכשיר (בחלק מהדפדפנים תוצג מיד הודעה לפתוח אותו).</li>
-      <li>אם לא נפתח אוטומטית, פותחים את אפליקציית <strong>הקבצים</strong> ומאתרים אותו בתיקיית ההורדות, ונוגעים בו.</li>
+      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
+      <li>בחלק מהדפדפנים ייפתח מיד מסך ייבוא לאנשי קשר; אם הקובץ רק ירד, פותחים את אפליקציית <strong>הקבצים</strong> ומאתרים אותו בתיקיית ההורדות ונוגעים בו.</li>
       <li>בוחרים לייבא את כל אנשי הקשר.</li>
       <li>פותחים וואטסאפ ← תפריט ← <strong>קבוצה חדשה</strong> (או רשימת תפוצה, בהתאם לגרסה) ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה.</li>
     </ol>
@@ -416,6 +417,7 @@ END:VCARD</code></pre>
     excludeBlocked: document.getElementById('exclude-blocked'),
     vcardSample: document.getElementById('vcard-sample'),
     generateBtn: document.getElementById('generate-btn'),
+    downloadLink: document.getElementById('download-link'),
     generateStatus: document.getElementById('generate-status'),
     fallbackCopy: document.getElementById('fallback-copy'),
     vcardTextarea: document.getElementById('vcard-textarea'),
@@ -423,6 +425,7 @@ END:VCARD</code></pre>
   };
 
   var workbook = null;
+  var lastObjectUrl = null;
 
   function normalizePhone(raw){
     if (raw === undefined || raw === null) return null;
@@ -508,6 +511,13 @@ END:VCARD</code></pre>
       'BEGIN:VCARD\nVERSION:3.0\nFN:' + sampleName + '\nTEL;TYPE=CELL:+972501234567\nEND:VCARD';
   }
 
+  function resetGeneratedFile(){
+    els.downloadLink.hidden = true;
+    els.generateStatus.hidden = true;
+    els.fallbackCopy.hidden = true;
+    if (lastObjectUrl){ URL.revokeObjectURL(lastObjectUrl); lastObjectUrl = null; }
+  }
+
   function refresh(){
     var prefix = els.prefixInput.value || '';
     var excludeBlocked = els.excludeBlocked.checked;
@@ -519,6 +529,7 @@ END:VCARD</code></pre>
     els.generateBtn.textContent = isDemoState
       ? 'העלו קובץ קודם'
       : (result.included.length === 0 ? 'אין אנשי קשר לייצוא' : 'צרו קובץ אנשי קשר (' + result.included.length + ')');
+    resetGeneratedFile();
     return result;
   }
 
@@ -542,8 +553,6 @@ END:VCARD</code></pre>
     var ws = workbook.Sheets[name];
     currentRows = parseSheet(ws);
     isDemoState = false;
-    els.generateStatus.hidden = true;
-    els.fallbackCopy.hidden = true;
     refresh();
   }
 
@@ -589,36 +598,27 @@ END:VCARD</code></pre>
     els.vcardTextarea.value = content;
   }
 
-  function downloadVCard(filename, content){
-    try {
-      var blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
-      return true;
-    } catch (err){
-      return false;
-    }
-  }
-
   els.generateBtn.addEventListener('click', function(){
     var result = refresh();
     if (isDemoState || result.included.length === 0) return;
     var content = result.included.map(function(c){ return buildVCardBlock(c.name, c.phone); }).join('');
-    els.generateStatus.hidden = true;
-    els.fallbackCopy.hidden = true;
 
-    var ok = downloadVCard('אנשי-קשר-לוואטסאפ.vcf', content);
-    if (ok){
+    // iOS Safari (and some other mobile browsers) unreliably support triggering a
+    // download via a script-clicked <a download> on a blob URL — it can silently
+    // do nothing. A real, visible link the user taps themselves is treated as a
+    // genuine user-initiated navigation everywhere, so we reveal one instead of
+    // auto-clicking it.
+    try {
+      var blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
+      lastObjectUrl = URL.createObjectURL(blob);
+      els.downloadLink.href = lastObjectUrl;
+      els.downloadLink.hidden = false;
+
+      var importStepNum = document.getElementById('import-step-num').textContent;
       els.generateStatus.hidden = false;
       els.generateStatus.className = 'generate-status status-ok';
-      els.generateStatus.textContent = '✓ הקובץ ירד. עכשיו פתחו אותו כדי להוסיף לאנשי הקשר (שלב 4 למטה).';
-    } else {
+      els.generateStatus.textContent = '✓ הקובץ מוכן — לחצו על הכפתור הירוק שהופיע כדי לפתוח/להוריד אותו, ואז המשיכו לשלב ' + importStepNum + ' למטה.';
+    } catch (err){
       showFallback(content);
     }
   });
