@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>בונה רשימת תפוצה — כלי עזר לספרי תור-Q</title>
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Rubik:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --ground:#faf8f3;
+    --surface:#ffffff;
+    --surface-alt:#f2ece0;
+    --ink:#211e1b;
+    --ink-soft:#6b6255;
+    --accent:#0f6e5c;
+    --accent-ink:#ffffff;
+    --accent-soft:#dfeee9;
+    --line:#e2dacb;
+    --warn:#8a5310;
+    --warn-soft:#f5e6d0;
+    --danger:#a22b2b;
+    --danger-soft:#f5dede;
+    --shadow:0 1px 2px rgba(33,30,27,.06), 0 10px 26px -12px rgba(33,30,27,.18);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#171410;
+      --surface:#211c15;
+      --surface-alt:#2a241a;
+      --ink:#f1ecdf;
+      --ink-soft:#b7ac99;
+      --accent:#4bc9a8;
+      --accent-ink:#0d2b23;
+      --accent-soft:#1e362f;
+      --line:#3a3327;
+      --warn:#e2ac5e;
+      --warn-soft:#3b2c16;
+      --danger:#e58c8c;
+      --danger-soft:#3a1f1f;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -14px rgba(0,0,0,.65);
+      color-scheme:dark;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important; animation:none!important;}
+  }
+  html,body{margin:0;padding:0;}
+  body{
+    direction:rtl;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:'Heebo',system-ui,'Segoe UI',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  #app{
+    max-width:560px;
+    margin:0 auto;
+    padding:28px 18px 64px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px;}
+
+  .hero{padding-block:4px 6px;}
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12.5px; font-weight:600; color:var(--ink-soft);
+    background:var(--surface-alt); border:1px solid var(--line);
+    padding:4px 10px; border-radius:999px; margin-bottom:12px;
+  }
+  h1{
+    font-family:'Rubik',system-ui,sans-serif;
+    font-weight:800;
+    font-size:clamp(26px,7vw,32px);
+    line-height:1.15;
+    margin:0 0 10px;
+    text-wrap:balance;
+  }
+  .lede{
+    margin:0; color:var(--ink-soft);
+    font-size:15.5px; line-height:1.65; max-width:60ch;
+  }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:18px 18px 20px;
+  }
+  .note{
+    background:var(--accent-soft);
+    border-color:transparent;
+    box-shadow:none;
+    padding:12px 16px;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .note p{margin:0; line-height:1.55;}
+  .note p + p{margin-top:10px;}
+
+  .step{position:relative;}
+  .step-head{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .step-num{
+    flex:0 0 auto;
+    width:26px; height:26px; border-radius:8px;
+    background:var(--accent); color:var(--accent-ink);
+    font-family:'Rubik',sans-serif; font-weight:700; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .step-head h2{
+    font-family:'Rubik',sans-serif; font-weight:700;
+    font-size:17.5px; margin:0; text-wrap:balance;
+  }
+  .step-help{
+    margin:0 0 14px; color:var(--ink-soft); font-size:13.5px; line-height:1.6;
+  }
+  .step-help strong{color:var(--ink); font-weight:600;}
+
+  .file-drop{
+    display:flex; align-items:center; gap:10px;
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    padding:16px;
+    cursor:pointer;
+    background:var(--surface-alt);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .file-drop:hover{border-color:var(--accent); background:var(--accent-soft);}
+  .file-drop-icon{font-size:22px;}
+  .file-drop-text{font-size:14.5px; font-weight:600;}
+  .file-name{
+    margin:10px 0 0; font-size:13.5px; color:var(--ink-soft);
+    overflow-wrap:anywhere;
+  }
+  .error-msg{
+    margin:10px 0 0; font-size:13.5px; color:var(--danger);
+    background:var(--danger-soft); border-radius:10px; padding:10px 12px;
+    line-height:1.5;
+  }
+
+  select{
+    width:100%; font-family:inherit; font-size:15px;
+    padding:11px 12px; border-radius:10px;
+    border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  }
+
+  .demo-badge{
+    display:inline-block; font-size:12px; font-weight:700;
+    color:var(--warn); background:var(--warn-soft);
+    border-radius:999px; padding:3px 10px; margin-bottom:14px;
+    letter-spacing:.02em;
+  }
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(2,1fr);
+    gap:10px; margin-bottom:16px;
+  }
+  .stat-tile{
+    border:1px solid var(--line); border-radius:12px;
+    padding:12px 12px 10px; background:var(--surface-alt);
+  }
+  .stat-tile-accent{background:var(--accent-soft); border-color:transparent;}
+  .stat-value{
+    font-family:'Rubik',sans-serif; font-weight:800; font-size:22px;
+    font-variant-numeric:tabular-nums; line-height:1.1;
+  }
+  .stat-tile-accent .stat-value{color:var(--accent);}
+  .stat-label{font-size:12.5px; color:var(--ink-soft); margin-top:3px;}
+
+  .field{display:block; margin-bottom:14px;}
+  .field-label{display:block; font-size:13.5px; font-weight:600; margin-bottom:6px;}
+  .field input[type="text"]{
+    width:100%; font-family:inherit; font-size:15px;
+    padding:11px 12px; border-radius:10px;
+    border:1px solid var(--line); background:var(--surface); color:var(--ink);
+  }
+  .field-hint{display:block; font-size:12.5px; color:var(--ink-soft); margin-top:6px; line-height:1.5;}
+
+  .checkbox-row{
+    display:flex; align-items:center; gap:8px;
+    font-size:14px; margin-bottom:16px; cursor:pointer;
+  }
+  .checkbox-row input{width:17px; height:17px; accent-color:var(--accent);}
+
+  .vcard-preview{
+    background:var(--surface-alt); border:1px solid var(--line);
+    border-radius:12px; padding:12px 14px;
+  }
+  .vcard-preview-label{font-size:12.5px; color:var(--ink-soft); margin-bottom:8px; font-weight:600;}
+  .vcard-preview pre{
+    margin:0; overflow-x:auto;
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:12.5px; line-height:1.7; direction:ltr; text-align:left;
+    color:var(--ink);
+  }
+
+  .btn-primary{
+    width:100%; border:none; border-radius:12px;
+    background:var(--accent); color:var(--accent-ink);
+    font-family:'Rubik',sans-serif; font-weight:700; font-size:15.5px;
+    padding:14px 16px; cursor:pointer;
+    transition:transform .1s ease, opacity .15s ease;
+  }
+  .btn-primary:disabled{opacity:.5; cursor:not-allowed;}
+  .btn-primary:not(:disabled):active{transform:scale(.98);}
+
+  .btn-secondary{
+    border:1px solid var(--line); border-radius:10px;
+    background:var(--surface); color:var(--ink);
+    font-family:inherit; font-weight:600; font-size:14px;
+    padding:10px 14px; cursor:pointer; margin-top:10px;
+  }
+  .btn-secondary:hover{border-color:var(--accent); color:var(--accent);}
+
+  .generate-status{
+    margin:12px 0 0; font-size:13.5px; padding:10px 12px;
+    border-radius:10px; line-height:1.5;
+  }
+  .status-ok{background:var(--accent-soft); color:var(--ink);}
+
+  .fallback-copy{margin-top:14px;}
+  .fallback-copy p{font-size:13.5px; color:var(--ink-soft); margin:0 0 8px; line-height:1.5;}
+  textarea#vcard-textarea{
+    width:100%; font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:12px; direction:ltr; text-align:left;
+    border:1px solid var(--line); border-radius:10px; padding:10px;
+    background:var(--surface-alt); color:var(--ink); resize:vertical;
+  }
+
+  .note-box{
+    background:var(--surface-alt); color:var(--ink);
+    border:1px solid var(--line);
+    border-radius:12px; padding:12px 14px; font-size:13.5px;
+    line-height:1.6; margin-bottom:16px;
+  }
+  .note-box code{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    background:rgba(0,0,0,.08); border-radius:4px; padding:1px 5px; direction:ltr; display:inline-block;
+  }
+
+  .os-tabs{display:flex; gap:8px; margin-bottom:14px;}
+  .os-tab{
+    flex:1 1 0; border:1px solid var(--line); background:var(--surface-alt);
+    color:var(--ink-soft); border-radius:10px; padding:9px 10px;
+    font-family:inherit; font-weight:600; font-size:14px; cursor:pointer;
+  }
+  .os-tab.active{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+
+  .os-steps{margin:0; padding-inline-start:22px; font-size:14px; line-height:1.75;}
+  .os-steps li{margin-bottom:8px;}
+  .os-steps strong{font-weight:700;}
+  .os-steps code{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    background:rgba(0,0,0,.08); border-radius:4px; padding:1px 5px; direction:ltr; display:inline-block;
+  }
+
+  footer.credit{
+    text-align:center; font-size:12px; color:var(--ink-soft);
+    padding-top:8px;
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <header class="hero">
+    <div class="hero-tag">📇 כלי עזר עצמאי — לא חלק מאפליקציית תור-Q</div>
+    <h1>בונה רשימת תפוצה</h1>
+    <p class="lede">
+      הופכים את קובץ הלקוחות שכבר מייצאים מהאפליקציה לקובץ אנשי קשר שהטלפון מזהה —
+      כדי לבנות ממנו קבוצה או רשימת תפוצה בוואטסאפ, בלי להקליד אף מספר טלפון ידנית.
+    </p>
+  </header>
+
+  <section class="card note">
+    <p>🔒 הכול קורה במכשיר שלכם בלבד. הקובץ שאתם מעלים לא נשלח לשום שרת — הפענוח וההמרה מתבצעים בדפדפן עצמו.</p>
+  </section>
+
+  <section class="card step" id="step-upload">
+    <div class="step-head"><span class="step-num">1</span><h2>העלאת קובץ הלקוחות</h2></div>
+    <p class="step-help">
+      באפליקציה: <strong>⚙ ← 📤 ייצוא לאקסל</strong> — הורידו את הקובץ לטלפון, ואז בחרו אותו כאן.
+    </p>
+    <label class="file-drop" for="file-input">
+      <span class="file-drop-icon">📁</span>
+      <span class="file-drop-text">בחירת קובץ (xlsx / xls / csv)</span>
+    </label>
+    <input type="file" id="file-input" accept=".xlsx,.xls,.csv" hidden>
+    <p class="file-name" id="file-name" hidden></p>
+    <p class="error-msg" id="upload-error" hidden></p>
+  </section>
+
+  <section class="card step" id="step-sheet" hidden>
+    <div class="step-head"><span class="step-num">2</span><h2>איזה גיליון?</h2></div>
+    <p class="step-help">נמצאו כמה גיליונות "לקוחות" בקובץ (למשל יצוא כלל-מספרה) — בחרו את הרשימה הרצויה.</p>
+    <select id="sheet-select"></select>
+  </section>
+
+  <section class="card step" id="step-preview">
+    <div class="step-head"><span class="step-num" id="preview-step-num">2</span><h2>תצוגה מקדימה</h2></div>
+
+    <span class="demo-badge" id="demo-badge">לדוגמה — עד שתעלו קובץ אמיתי</span>
+
+    <div class="stat-row" id="stat-row"></div>
+
+    <label class="field" for="prefix-input">
+      <span class="field-label">תחילית לשם איש הקשר</span>
+      <input type="text" id="prefix-input" value="לקוח-" maxlength="20">
+      <span class="field-hint">כך כל אנשי הקשר שיובאו יעמדו ברצף אחד ברשימת אנשי הקשר שלכם, וקל יהיה לסמן את כולם יחד כשבונים את רשימת התפוצה.</span>
+    </label>
+
+    <label class="checkbox-row" for="exclude-blocked">
+      <input type="checkbox" id="exclude-blocked" checked>
+      <span>לא לכלול לקוחות חסומים</span>
+    </label>
+
+    <div class="vcard-preview">
+      <div class="vcard-preview-label">כך תיראה רשומה אחת בקובץ שייווצר:</div>
+      <pre id="vcard-sample"><code>BEGIN:VCARD
+VERSION:3.0
+FN:לקוח-דנה כהן
+TEL;TYPE=CELL:+972501234567
+END:VCARD</code></pre>
+    </div>
+  </section>
+
+  <section class="card step" id="step-generate">
+    <div class="step-head"><span class="step-num" id="generate-step-num">3</span><h2>יצירת קובץ אנשי הקשר</h2></div>
+    <button id="generate-btn" class="btn-primary" disabled>העלו קובץ קודם</button>
+    <p class="generate-status" id="generate-status" hidden></p>
+
+    <div class="fallback-copy" id="fallback-copy" hidden>
+      <p>ההורדה לא זמינה כרגע בדפדפן הזה — אפשר להעתיק את התוכן ידנית ולהדביק בקובץ טקסט חדש שנשמר עם סיומת \u200E.vcf:</p>
+      <textarea id="vcard-textarea" readonly rows="6"></textarea>
+      <button id="copy-btn" class="btn-secondary">העתיקו טקסט</button>
+    </div>
+  </section>
+
+  <section class="card step" id="step-import">
+    <div class="step-head"><span class="step-num" id="import-step-num">4</span><h2>ייבוא לטלפון ובניית רשימת התפוצה</h2></div>
+
+    <div class="note-box">
+      💡 הקובץ שיורד בשלב הקודם הוא קובץ אנשי קשר מוכן לייבוא (<code>.vcf</code>) — אין צורך לשנות סיומת או שם קובץ.
+    </div>
+
+    <div class="os-tabs" role="tablist">
+      <button class="os-tab active" data-os="ios" id="os-tab-ios">iPhone</button>
+      <button class="os-tab" data-os="android" id="os-tab-android">Android</button>
+    </div>
+
+    <ol class="os-steps" id="os-steps-ios">
+      <li>לאחר הלחיצה על "צרו קובץ אנשי קשר" למעלה, קובץ בשם <code>אנשי-קשר-לוואטסאפ.vcf</code> יורד למכשיר.</li>
+      <li>פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים את הקובץ — בדרך כלל תחת "הורדות".</li>
+      <li>נוגעים בקובץ — ייפתח מסך "הוספת אנשי קשר" עם כל הרשימה בבת אחת. מאשרים.</li>
+      <li>פותחים וואטסאפ ← צ'אטים חדשים ← <strong>רשימת תפוצה חדשה</strong> ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה (הם יופיעו ברצף אחד).</li>
+    </ol>
+    <ol class="os-steps" id="os-steps-android" hidden>
+      <li>לאחר הלחיצה על "צרו קובץ אנשי קשר" למעלה, קובץ בשם <code>אנשי-קשר-לוואטסאפ.vcf</code> יורד למכשיר (בחלק מהדפדפנים תוצג מיד הודעה לפתוח אותו).</li>
+      <li>אם לא נפתח אוטומטית, פותחים את אפליקציית <strong>הקבצים</strong> ומאתרים אותו בתיקיית ההורדות, ונוגעים בו.</li>
+      <li>בוחרים לייבא את כל אנשי הקשר.</li>
+      <li>פותחים וואטסאפ ← תפריט ← <strong>קבוצה חדשה</strong> (או רשימת תפוצה, בהתאם לגרסה) ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה.</li>
+    </ol>
+
+    <div class="note" style="margin-top:14px;">
+      <p>💡 <strong>לקוח שכבר היה שמור אצלכם באנשי הקשר מראש</strong> (בשם אחר, בלי הקידומת) —
+      לפעמים ייווצר <strong>רשומה כפולה</strong> (הישנה נשארת + רשומה חדשה עם הקידומת, אותו
+      מספר), ולפעמים הטלפון ימזג אותן לרשומה אחת עם השם החדש. בשני המקרים, <strong>אפליקציית
+      WhatsApp בטלפון עצמו לרוב לא תעדכן את השם המוצג</strong> ללקוח כזה — היא שומרת קאש פנימי
+      משלה שלא מתרענן בפועל (נבדק: גם עריכת השם, גם מחיקה ויצירה מחדש של איש הקשר, וגם ביטול
+      ומתן ההרשאה לאנשי קשר — אף אחת מהפעולות האלה לא גרמה לוואטסאפ בטלפון לעדכן את השם). במסך
+      "קבוצה חדשה" בטלפון, חיפוש לפי הקידומת עלול פשוט לא למצוא לקוח כזה בכלל.</p>
+      <p>✅ <strong>הפתרון שאומת בפועל: בנו את הקבוצה/רשימת התפוצה דרך
+      <a href="https://web.whatsapp.com" target="_blank" rel="noopener">WhatsApp Web</a>
+      (בדפדפן, במחשב) ולא דרך אפליקציית הטלפון.</strong> ב-WhatsApp Web חיפוש לפי הקידומת
+      מוצא נכון גם לקוחות שכבר היו שמורים אצלכם מראש, עם השם המעודכן — כולל במסך "צירוף
+      חברים לקבוצה" עצמו. אם יש לכם רשימה ארוכה, זו הדרך המומלצת לבנייה מלאה של הקבוצה,
+      גם אם חלק גדול מהלקוחות כבר היו שמורים אצלכם קודם.</p>
+    </div>
+  </section>
+
+  <footer class="credit">כלי עזר עצמאי לספרי "תור-Q" — לא שומר ולא שולח מידע לשום מקום.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+  var CUSTOMER_SHEET_HINT = 'לקוחות';
+  var HEADER_NAME = 'שם מלא';
+  var HEADER_PHONE = 'טלפון';
+  var HEADER_BLOCKED = 'חסום';
+
+  var els = {
+    fileInput: document.getElementById('file-input'),
+    fileName: document.getElementById('file-name'),
+    uploadError: document.getElementById('upload-error'),
+    stepSheet: document.getElementById('step-sheet'),
+    sheetSelect: document.getElementById('sheet-select'),
+    demoBadge: document.getElementById('demo-badge'),
+    statRow: document.getElementById('stat-row'),
+    prefixInput: document.getElementById('prefix-input'),
+    excludeBlocked: document.getElementById('exclude-blocked'),
+    vcardSample: document.getElementById('vcard-sample'),
+    generateBtn: document.getElementById('generate-btn'),
+    generateStatus: document.getElementById('generate-status'),
+    fallbackCopy: document.getElementById('fallback-copy'),
+    vcardTextarea: document.getElementById('vcard-textarea'),
+    copyBtn: document.getElementById('copy-btn')
+  };
+
+  var workbook = null;
+
+  function normalizePhone(raw){
+    if (raw === undefined || raw === null) return null;
+    var digits = String(raw).replace(/\D/g, '');
+    if (!digits) return null;
+    var stripped = digits.replace(/^0+/, '');
+    if (!stripped) return null;
+    var withCountry = stripped.indexOf('972') === 0 ? stripped : ('972' + stripped);
+    if (withCountry.length < 11 || withCountry.length > 13) return null;
+    return '+' + withCountry;
+  }
+
+  function escapeVCardText(str){
+    return String(str)
+      .replace(/\\/g, '\\\\')
+      .replace(/\n/g, '\\n')
+      .replace(/,/g, '\\,')
+      .replace(/;/g, '\\;');
+  }
+
+  function buildVCardBlock(fullName, phone){
+    return 'BEGIN:VCARD\r\n' +
+      'VERSION:3.0\r\n' +
+      'FN:' + escapeVCardText(fullName) + '\r\n' +
+      'TEL;TYPE=CELL:' + phone + '\r\n' +
+      'END:VCARD\r\n';
+  }
+
+  function parseSheet(ws){
+    var rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
+    return rows.map(function(r){
+      return {
+        name: String(r[HEADER_NAME] != null ? r[HEADER_NAME] : '').trim(),
+        phoneRaw: r[HEADER_PHONE],
+        blocked: String(r[HEADER_BLOCKED] != null ? r[HEADER_BLOCKED] : '').trim() === 'כן'
+      };
+    });
+  }
+
+  function computeResult(rows, prefix, excludeBlocked){
+    var blockedExcluded = 0, invalidPhone = 0;
+    var included = [];
+    for (var i = 0; i < rows.length; i++){
+      var row = rows[i];
+      if (excludeBlocked && row.blocked){ blockedExcluded++; continue; }
+      var phone = normalizePhone(row.phoneRaw);
+      if (!phone){ invalidPhone++; continue; }
+      var name = row.name || 'לקוח ללא שם';
+      included.push({ name: prefix + name, phone: phone });
+    }
+    return { total: rows.length, blockedExcluded: blockedExcluded, invalidPhone: invalidPhone, included: included };
+  }
+
+  var DEMO_ROWS = [
+    { name: 'דנה כהן', phoneRaw: '0501234567', blocked: false },
+    { name: 'איתי לוי', phoneRaw: '0521112233', blocked: false },
+    { name: 'נועה ברק', phoneRaw: '0541234567', blocked: true },
+    { name: 'יוסי מזרחי', phoneRaw: '', blocked: false }
+  ];
+  var currentRows = DEMO_ROWS;
+  var isDemoState = true;
+
+  function renderStats(result, isDemo){
+    els.demoBadge.hidden = !isDemo;
+    els.statRow.innerHTML = '';
+    var tiles = [
+      { label: 'לקוחות בקובץ', value: result.total },
+      { label: 'ייכללו באנשי הקשר', value: result.included.length, accent: true },
+      { label: 'חסומים שסוננו', value: result.blockedExcluded },
+      { label: 'ללא טלפון תקין', value: result.invalidPhone }
+    ];
+    tiles.forEach(function(t){
+      var div = document.createElement('div');
+      div.className = 'stat-tile' + (t.accent ? ' stat-tile-accent' : '');
+      div.innerHTML = '<div class="stat-value">' + t.value + '</div><div class="stat-label">' + t.label + '</div>';
+      els.statRow.appendChild(div);
+    });
+  }
+
+  function renderSample(prefix){
+    var sampleName = escapeVCardText((prefix || '') + 'דנה כהן');
+    els.vcardSample.querySelector('code').textContent =
+      'BEGIN:VCARD\nVERSION:3.0\nFN:' + sampleName + '\nTEL;TYPE=CELL:+972501234567\nEND:VCARD';
+  }
+
+  function refresh(){
+    var prefix = els.prefixInput.value || '';
+    var excludeBlocked = els.excludeBlocked.checked;
+    var result = computeResult(currentRows, prefix, excludeBlocked);
+    renderStats(result, isDemoState);
+    renderSample(prefix);
+    var disabled = isDemoState || result.included.length === 0;
+    els.generateBtn.disabled = disabled;
+    els.generateBtn.textContent = isDemoState
+      ? 'העלו קובץ קודם'
+      : (result.included.length === 0 ? 'אין אנשי קשר לייצוא' : 'צרו קובץ אנשי קשר (' + result.included.length + ')');
+    return result;
+  }
+
+  function renumberSteps(){
+    var sheetVisible = !els.stepSheet.hidden;
+    document.getElementById('preview-step-num').textContent = sheetVisible ? '3' : '2';
+    document.getElementById('generate-step-num').textContent = sheetVisible ? '4' : '3';
+    document.getElementById('import-step-num').textContent = sheetVisible ? '5' : '4';
+  }
+
+  function setSheetOptions(names){
+    els.sheetSelect.innerHTML = '';
+    names.forEach(function(n){
+      var opt = document.createElement('option');
+      opt.value = n; opt.textContent = n;
+      els.sheetSelect.appendChild(opt);
+    });
+  }
+
+  function loadSheetByName(name){
+    var ws = workbook.Sheets[name];
+    currentRows = parseSheet(ws);
+    isDemoState = false;
+    els.generateStatus.hidden = true;
+    els.fallbackCopy.hidden = true;
+    refresh();
+  }
+
+  els.sheetSelect.addEventListener('change', function(){ loadSheetByName(els.sheetSelect.value); });
+  els.prefixInput.addEventListener('input', refresh);
+  els.excludeBlocked.addEventListener('change', refresh);
+
+  els.fileInput.addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if (!file) return;
+    els.uploadError.hidden = true;
+    els.fileName.hidden = false;
+    els.fileName.textContent = '📎 ' + file.name;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      try {
+        var data = new Uint8Array(ev.target.result);
+        workbook = XLSX.read(data, { type: 'array' });
+        var matches = workbook.SheetNames.filter(function(n){ return n.indexOf(CUSTOMER_SHEET_HINT) !== -1; });
+        var candidates = matches.length ? matches : workbook.SheetNames;
+        if (matches.length === 0){
+          els.uploadError.hidden = false;
+          els.uploadError.textContent = 'לא נמצא גיליון בשם "לקוחות" בקובץ — מוצגים כל הגיליונות שנמצאו, בחרו את המתאים.';
+        }
+        if (candidates.length > 1){
+          els.stepSheet.hidden = false;
+          setSheetOptions(candidates);
+        } else {
+          els.stepSheet.hidden = true;
+        }
+        renumberSteps();
+        loadSheetByName(candidates[0]);
+      } catch (err){
+        els.uploadError.hidden = false;
+        els.uploadError.textContent = 'לא הצלחנו לקרוא את הקובץ. ודאו שזהו קובץ Excel/CSV תקין ונסו שוב.';
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  function showFallback(content){
+    els.fallbackCopy.hidden = false;
+    els.vcardTextarea.value = content;
+  }
+
+  function downloadVCard(filename, content){
+    try {
+      var blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+      return true;
+    } catch (err){
+      return false;
+    }
+  }
+
+  els.generateBtn.addEventListener('click', function(){
+    var result = refresh();
+    if (isDemoState || result.included.length === 0) return;
+    var content = result.included.map(function(c){ return buildVCardBlock(c.name, c.phone); }).join('');
+    els.generateStatus.hidden = true;
+    els.fallbackCopy.hidden = true;
+
+    var ok = downloadVCard('אנשי-קשר-לוואטסאפ.vcf', content);
+    if (ok){
+      els.generateStatus.hidden = false;
+      els.generateStatus.className = 'generate-status status-ok';
+      els.generateStatus.textContent = '✓ הקובץ ירד. עכשיו פתחו אותו כדי להוסיף לאנשי הקשר (שלב 4 למטה).';
+    } else {
+      showFallback(content);
+    }
+  });
+
+  els.copyBtn.addEventListener('click', function(){
+    navigator.clipboard.writeText(els.vcardTextarea.value).then(function(){
+      els.copyBtn.textContent = '✓ הועתק';
+      setTimeout(function(){ els.copyBtn.textContent = 'העתיקו טקסט'; }, 2000);
+    }).catch(function(){
+      els.vcardTextarea.select();
+    });
+  });
+
+  document.querySelectorAll('.os-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.os-tab').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var os = btn.getAttribute('data-os');
+      document.getElementById('os-steps-ios').hidden = os !== 'ios';
+      document.getElementById('os-steps-android').hidden = os !== 'android';
+    });
+  });
+
+  renumberSteps();
+  refresh();
+})();
+</script>
+
+</body>
+</html>
