@@ -367,14 +367,14 @@ END:VCARD</code></pre>
     </div>
 
     <ol class="os-steps" id="os-steps-ios">
-      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
-      <li>ייפתח מסך "הוספת איש קשר" של iOS. לוחצים על <strong>הסימן הכחול ✓</strong> למעלה כדי לאשר את ההוספה.</li>
-      <li>חשוב: אנשי הקשר <strong>מתווספים ישירות לאפליקציית "אנשי קשר"</strong> — לא נשמר קובץ באפליקציית "קבצים". כדי לוודא שההוספה הצליחה, פותחים את אפליקציית <strong>אנשי קשר</strong> ומחפשים לפי הקידומת.</li>
+      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו — הקובץ יורד למכשיר.</li>
+      <li>פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים את הקובץ — בדרך כלל תחת "הורדות".</li>
+      <li>נוגעים בקובץ — ייפתח מסך עם כל אנשי הקשר שבקובץ בבת אחת. בוחרים <strong>הוספת כל אנשי הקשר</strong> (או מאשרים בסימן הכחול ✓).</li>
       <li>פותחים וואטסאפ ← צ'אטים חדשים ← <strong>רשימת תפוצה חדשה</strong> ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה (הם יופיעו ברצף אחד).</li>
     </ol>
     <ol class="os-steps" id="os-steps-android" hidden>
-      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
-      <li>בחלק מהדפדפנים ייפתח מיד מסך ייבוא לאנשי קשר; אם הקובץ רק ירד, פותחים את אפליקציית <strong>הקבצים</strong> ומאתרים אותו בתיקיית ההורדות ונוגעים בו.</li>
+      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו — הקובץ יורד למכשיר.</li>
+      <li>פותחים את אפליקציית <strong>הקבצים</strong> ומאתרים אותו בתיקיית ההורדות, ונוגעים בו.</li>
       <li>בוחרים לייבא את כל אנשי הקשר.</li>
       <li>פותחים וואטסאפ ← תפריט ← <strong>קבוצה חדשה</strong> (או רשימת תפוצה, בהתאם לגרסה) ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה.</li>
     </ol>
@@ -618,8 +618,17 @@ END:VCARD</code></pre>
     // do nothing. A real, visible link the user taps themselves is treated as a
     // genuine user-initiated navigation everywhere, so we reveal one instead of
     // auto-clicking it.
+    //
+    // MIME type is deliberately application/octet-stream, NOT text/vcard — confirmed live
+    // that a text/vcard blob makes iOS Safari open its own built-in "Quick Look"-style
+    // contact preview directly from the blob: URL, but that preview turned out to be
+    // read-only: tapping its own confirm checkmark added nothing to Contacts, and a
+    // multi-contact file only ever surfaced the first record. Serving an unrecognized
+    // binary type instead stops Safari from intercepting it for that broken preview and
+    // makes it save a real file to the Files app — opening a REAL file (not a blob: URL)
+    // is what actually triggers iOS's fully-functional multi-contact import screen.
     try {
-      var blob = new Blob([content], { type: 'text/vcard;charset=utf-8' });
+      var blob = new Blob([content], { type: 'application/octet-stream' });
       lastObjectUrl = URL.createObjectURL(blob);
       els.downloadLink.href = lastObjectUrl;
       els.downloadLink.hidden = false;
@@ -627,7 +636,7 @@ END:VCARD</code></pre>
       var importStepNum = document.getElementById('import-step-num').textContent;
       els.generateStatus.hidden = false;
       els.generateStatus.className = 'generate-status status-ok';
-      els.generateStatus.textContent = '✓ הקובץ מוכן — לחצו על הכפתור הירוק שהופיע כדי לפתוח/להוריד אותו, ואז המשיכו לשלב ' + importStepNum + ' למטה.';
+      els.generateStatus.textContent = '✓ הקובץ מוכן — לחצו על הכפתור הירוק שהופיע כדי להוריד אותו לטלפון, ואז המשיכו לשלב ' + importStepNum + ' למטה כדי לפתוח אותו ולייבא את אנשי הקשר.';
     } catch (err){
       showFallback(content);
     }
