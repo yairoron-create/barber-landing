@@ -196,18 +196,6 @@
   }
   .checkbox-row input{width:17px; height:17px; accent-color:var(--accent);}
 
-  .vcard-preview{
-    background:var(--surface-alt); border:1px solid var(--line);
-    border-radius:12px; padding:12px 14px;
-  }
-  .vcard-preview-label{font-size:12.5px; color:var(--ink-soft); margin-bottom:8px; font-weight:600;}
-  .vcard-preview pre{
-    margin:0; overflow-x:auto;
-    font-family:'JetBrains Mono',ui-monospace,monospace;
-    font-size:12.5px; line-height:1.7; direction:ltr; text-align:left;
-    color:var(--ink);
-  }
-
   .btn-primary{
     width:100%; border:none; border-radius:12px;
     background:var(--accent); color:var(--accent-ink);
@@ -240,17 +228,6 @@
     font-size:12px; direction:ltr; text-align:left;
     border:1px solid var(--line); border-radius:10px; padding:10px;
     background:var(--surface-alt); color:var(--ink); resize:vertical;
-  }
-
-  .note-box{
-    background:var(--surface-alt); color:var(--ink);
-    border:1px solid var(--line);
-    border-radius:12px; padding:12px 14px; font-size:13.5px;
-    line-height:1.6; margin-bottom:16px;
-  }
-  .note-box code{
-    font-family:'JetBrains Mono',ui-monospace,monospace;
-    background:rgba(0,0,0,.08); border-radius:4px; padding:1px 5px; direction:ltr; display:inline-block;
   }
 
   .os-tabs{display:flex; gap:8px; margin-bottom:14px;}
@@ -329,16 +306,6 @@
       <input type="checkbox" id="exclude-blocked" checked>
       <span>לא לכלול לקוחות חסומים</span>
     </label>
-
-    <div class="vcard-preview">
-      <div class="vcard-preview-label">כך תיראה רשומה אחת בקובץ שייווצר:</div>
-      <pre id="vcard-sample"><code>BEGIN:VCARD
-VERSION:3.0
-N:לקוח-דנה כהן;;;;
-FN:לקוח-דנה כהן
-TEL;TYPE=CELL:+972501234567
-END:VCARD</code></pre>
-    </div>
   </section>
 
   <section class="card step" id="step-generate">
@@ -356,10 +323,6 @@ END:VCARD</code></pre>
 
   <section class="card step" id="step-import">
     <div class="step-head"><span class="step-num" id="import-step-num">4</span><h2>ייבוא לטלפון ובניית רשימת התפוצה</h2></div>
-
-    <div class="note-box">
-      💡 הקובץ שנוצר בשלב הקודם הוא קובץ אנשי קשר מוכן לייבוא (<code>.vcf</code>) — אין צורך לשנות סיומת או שם קובץ.
-    </div>
 
     <div class="os-tabs" role="tablist">
       <button class="os-tab active" data-os="ios" id="os-tab-ios">iPhone</button>
@@ -421,7 +384,6 @@ END:VCARD</code></pre>
     statRow: document.getElementById('stat-row'),
     prefixInput: document.getElementById('prefix-input'),
     excludeBlocked: document.getElementById('exclude-blocked'),
-    vcardSample: document.getElementById('vcard-sample'),
     generateBtn: document.getElementById('generate-btn'),
     downloadLink: document.getElementById('download-link'),
     generateStatus: document.getElementById('generate-status'),
@@ -519,12 +481,6 @@ END:VCARD</code></pre>
     });
   }
 
-  function renderSample(prefix){
-    var sampleName = escapeVCardText((prefix || '') + 'דנה כהן');
-    els.vcardSample.querySelector('code').textContent =
-      'BEGIN:VCARD\nVERSION:3.0\nN:' + sampleName + ';;;;\nFN:' + sampleName + '\nTEL;TYPE=CELL:+972501234567\nEND:VCARD';
-  }
-
   function resetGeneratedFile(){
     els.downloadLink.hidden = true;
     els.generateStatus.hidden = true;
@@ -540,7 +496,6 @@ END:VCARD</code></pre>
     var excludeBlocked = els.excludeBlocked.checked;
     var result = computeResult(currentRows, prefix, excludeBlocked);
     renderStats(result, isDemoState);
-    renderSample(prefix);
     var disabled = isDemoState || result.included.length === 0;
     els.generateBtn.disabled = disabled;
     els.generateBtn.textContent = isDemoState
