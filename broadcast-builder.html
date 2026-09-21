@@ -367,8 +367,10 @@ END:VCARD</code></pre>
     </div>
 
     <ol class="os-steps" id="os-steps-ios">
-      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו.</li>
-      <li>בדרך כלל ייפתח מיד מסך "הוספת איש קשר". מאשרים בסימן הכחול ✓ למעלה. אם במקום זה הקובץ רק ירד, פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים אותו תחת "הורדות" ונוגעים בו.</li>
+      <li>אחרי הלחיצה על "צרו קובץ אנשי קשר" בשלב הקודם, יופיע כפתור ירוק נוסף — <strong>"קובץ מוכן — לחצו כאן לפתיחה/הורדה"</strong>. לוחצים עליו — הקובץ יורד למכשיר.</li>
+      <li>פותחים את אפליקציית <strong>קבצים</strong> (Files) ומאתרים את הקובץ — בדרך כלל תחת "הורדות". <strong>חשוב: אין לגעת בקובץ ישירות</strong> (זה פותח תצוגה שלא שומרת כלום) — לוחצים על אייקון השיתוף ⬆ שלו.</li>
+      <li>בוחרים <strong>הודעות (Messages)</strong> מרשימת השיתוף, ושולחים לעצמכם (למספר שלכם) — או לכל מספר אחר.</li>
+      <li>פותחים את ההודעה שהתקבלה ונוגעים בקובץ המצורף — ייפתח מסך <strong>"הוספת X אנשי קשר"</strong> עם כל הרשימה. לוחצים <strong>שמירה</strong> כדי להוסיף את כולם בבת אחת.</li>
       <li>פותחים וואטסאפ ← צ'אטים חדשים ← <strong>רשימת תפוצה חדשה</strong> ← מסמנים את אנשי הקשר עם התחילית שבחרתם למעלה (הם יופיעו ברצף אחד).</li>
     </ol>
     <ol class="os-steps" id="os-steps-android" hidden>
@@ -615,24 +617,22 @@ END:VCARD</code></pre>
     if (isDemoState || result.included.length === 0) return;
     var content = result.included.map(function(c){ return buildVCardBlock(c.name, c.phone); }).join('');
 
-    // iOS Safari (and some other mobile browsers) unreliably support triggering a
-    // download via a script-clicked <a download> on a blob URL — it can silently
-    // do nothing. A real, visible link the user taps themselves is treated as a
-    // genuine user-initiated navigation everywhere, so we reveal one instead of
-    // auto-clicking it.
+    // iOS Safari unreliably supports triggering a download via a script-clicked <a
+    // download> on a blob URL — it can silently do nothing. A real, visible link the
+    // user taps themselves is treated as a genuine user-initiated navigation everywhere,
+    // so we reveal one instead of auto-clicking it.
     //
-    // Confirmed live, across every combination tried (blob: + text/vcard with a real tap,
-    // blob: + text/vcard auto-clicked, data: + text/vcard, with and without the vCard's
-    // required N field): navigating straight to vcard-typed content opens iOS's own
-    // "Add Contact" Quick Look preview, but its confirm action never actually writes
-    // anything to Contacts, and a multi-record file only ever shows one card. This looks
-    // like a real, unfixable-from-here iOS restriction on web-page-originated content.
-    //
-    // Back to application/octet-stream — the one variant confirmed to actually save a
-    // real file to the Files app (not just open a broken preview). Sharing that file via
-    // Gmail failed (Gmail's own attach picker rejected it), but Gmail is a third-party
-    // app doing its own validation — Messages (first-party, and known to correctly handle
-    // multi-vCard attachments) hasn't been tried yet as the sharing channel.
+    // MIME type is deliberately application/octet-stream, not text/vcard — confirmed
+    // live, across several combinations (blob: and data: URIs, with and without the
+    // vCard's required N field), that navigating straight to vcard-typed content just
+    // opens iOS's own "Add Contact" Quick Look preview, which never actually writes
+    // anything to Contacts and only ever shows the first record of a multi-contact file —
+    // a real iOS restriction on web-page-originated content, not something fixable here.
+    // octet-stream avoids that entirely by making Safari save a genuine file instead of
+    // opening any preview. The one confirmed-working import path from there: open Files,
+    // share the saved file via Messages (NOT Gmail — its own attach picker rejects this
+    // file, and opening it directly from Files reproduces the same broken preview above),
+    // then tap the attachment inside the Messages conversation — see the iOS steps below.
     try {
       var blob = new Blob([content], { type: 'application/octet-stream' });
       lastObjectUrl = URL.createObjectURL(blob);
