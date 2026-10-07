@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>הוספת האפליקציה למסך הבית — תור-Q</title>
+<meta name="description" content="מדריך שלב-אחר-שלב להוספת אפליקציית תור-Q למסך הבית, לאייפון ולאנדרואיד">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Rubik:wght@600;700;800&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --ground:#faf9ff;
+  --surface:#ffffff;
+  --surface-alt:#f1eefc;
+  --ink:#241b3d;
+  --ink-soft:#655d82;
+  --accent:#667eea;
+  --accent-ink:#ffffff;
+  --accent-soft:#eceafc;
+  --iphone:#2563eb;
+  --iphone-soft:#e7eefd;
+  --android:#16a34a;
+  --android-soft:#e5f6ec;
+  --line:#e3defa;
+  --warn:#c2740a;
+  --warn-soft:#fbead2;
+  --shadow:0 1px 2px rgba(36,27,61,.05), 0 10px 28px -14px rgba(36,27,61,.22);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --ground:#15111f;
+    --surface:#1f1a30;
+    --surface-alt:#261f3b;
+    --ink:#ece8f7;
+    --ink-soft:#a79dc6;
+    --accent:#8b9ef0;
+    --accent-ink:#171233;
+    --accent-soft:#2a2448;
+    --iphone:#6ea0ff;
+    --iphone-soft:#20283f;
+    --android:#3ed37f;
+    --android-soft:#1c3327;
+    --line:#352c4e;
+    --warn:#f0b429;
+    --warn-soft:#3a2c16;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -14px rgba(0,0,0,.65);
+  }
+}
+*{box-sizing:border-box;}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important;} }
+html,body{margin:0;padding:0;}
+body{
+  direction:rtl;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:'Heebo',system-ui,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+[hidden]{display:none!important;}
+a{color:var(--accent);text-decoration:none;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px;}
+
+#app{
+  max-width:760px;
+  margin:0 auto;
+  padding:36px 20px 72px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.hero{text-align:center; padding-block:4px 2px; display:flex; flex-direction:column; align-items:center; gap:14px;}
+.brand-pill{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'Rubik',sans-serif; font-weight:700; font-size:14px;
+  background:var(--surface-alt); color:var(--accent);
+  padding:6px 16px; border-radius:999px; border:1px solid var(--line);
+}
+.hero h1{
+  font-family:'Rubik',sans-serif;
+  font-weight:800;
+  font-size:clamp(26px,5.5vw,36px);
+  line-height:1.2;
+  margin:0;
+  text-wrap:balance;
+}
+.hero .lede{margin:0; color:var(--ink-soft); font-size:16px; line-height:1.6; max-width:46ch;}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:22px 24px;
+}
+
+.note-row{display:flex; align-items:flex-start; gap:12px;}
+.note-row + .note-row{margin-top:14px;}
+.note-icon{font-size:22px; line-height:1.4; flex:0 0 auto;}
+.note-row p{margin:0; font-size:15.5px; line-height:1.6; color:var(--ink);}
+.note-row p b{color:var(--ink); font-weight:700;}
+
+.tabs{
+  display:flex;
+  gap:10px;
+  background:var(--surface-alt);
+  border-radius:16px;
+  padding:6px;
+}
+.tab-btn{
+  flex:1;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-family:'Rubik',sans-serif; font-weight:700; font-size:16px;
+  color:var(--ink-soft);
+  background:transparent;
+  border:none;
+  border-radius:12px;
+  padding:14px 10px;
+  cursor:pointer;
+}
+.tab-btn.active{background:var(--surface); color:var(--ink); box-shadow:var(--shadow);}
+.tab-btn[data-tab="iphone"].active{color:var(--iphone);}
+.tab-btn[data-tab="android"].active{color:var(--android);}
+
+.platform{display:flex; flex-direction:column; gap:18px;}
+
+.step{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.step-head{display:flex; align-items:center; gap:12px;}
+.step-num{
+  flex:0 0 auto;
+  width:34px; height:34px; border-radius:17px;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-family:'Rubik',sans-serif; font-weight:700; font-size:16px;
+}
+.step-plat{margin:0; font-family:'Rubik',sans-serif; font-weight:600; font-size:13.5px; color:var(--ink-soft); letter-spacing:.2px;}
+
+.step-body{display:flex; flex-direction:row; gap:26px; align-items:center;}
+.step-text{flex:1; display:flex; flex-direction:column; gap:10px;}
+.step-text h2{
+  font-family:'Rubik',sans-serif; font-weight:700;
+  font-size:21px; line-height:1.3; margin:0; text-wrap:balance;
+}
+.step-text p{margin:0; font-size:15.5px; line-height:1.6; color:var(--ink-soft);}
+.step-text p b{color:var(--ink); font-weight:600;}
+
+.step-img-wrap{
+  flex:0 0 auto;
+  width:150px;
+  border-radius:20px;
+  overflow:hidden;
+  border:5px solid var(--ink);
+  box-shadow:var(--shadow);
+}
+.step-img-wrap img{width:150px; height:auto; display:block;}
+
+.step.done .step-num{background:var(--android);}
+
+ul.bullets{margin:0; padding-inline-start:22px; display:flex; flex-direction:column; gap:10px;}
+ul.bullets li{font-size:15.5px; line-height:1.6; color:var(--ink-soft);}
+ul.bullets li::marker{color:var(--ink-soft);}
+ul.bullets li b{color:var(--ink); font-weight:600;}
+
+.tips h2{
+  font-family:'Rubik',sans-serif; font-weight:700; font-size:20px;
+  margin:0 0 18px; text-wrap:balance;
+}
+.tip{display:flex; align-items:flex-start; gap:14px;}
+.tip + .tip{margin-top:16px; padding-top:16px; border-top:1px solid var(--line);}
+.tip-icon{
+  flex:0 0 auto; width:38px; height:38px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+}
+.tip-icon.warn{background:var(--warn-soft); color:var(--warn);}
+.tip-icon.net{background:var(--accent-soft); color:var(--accent);}
+.tip-icon.ok{background:var(--android-soft); color:var(--android);}
+.tip p{margin:0; font-size:15px; line-height:1.6; color:var(--ink); padding-top:7px;}
+
+.closing{text-align:center; display:flex; flex-direction:column; align-items:center; gap:10px; padding-top:6px;}
+.closing-emoji{font-size:34px; margin:0;}
+.closing h2{font-family:'Rubik',sans-serif; font-weight:800; font-size:24px; margin:0;}
+.closing .lede{margin:0; color:var(--ink-soft); font-size:15px;}
+.contact-card{
+  margin-top:10px;
+  background:var(--surface-alt);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px 28px;
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+}
+.contact-name{margin:0; font-family:'Rubik',sans-serif; font-weight:700; font-size:15.5px;}
+.contact-line{margin:0; font-size:14px; color:var(--ink-soft);}
+
+@media (max-width:640px){
+  .step-body{flex-direction:column; align-items:center;}
+  .step-text{align-items:center; text-align:center;}
+  .step-text p{text-align:center;}
+  .step-img-wrap{width:190px;}
+  .step-img-wrap img{width:190px;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header class="hero">
+    <a class="brand-pill" href="/">✂ תור-Q</a>
+    <h1>הוספת האפליקציה למסך הבית</h1>
+    <p class="lede">מדריך שלב-אחר-שלב — בחרו למטה את סוג המכשיר שלכם</p>
+  </header>
+
+  <section class="card">
+    <div class="note-row">
+      <span class="note-icon">🔗</span>
+      <p>קיבלתם קישור? פתחו אותו ישירות דרך <b>Chrome</b> או <b>Safari</b>, ולא מתוך אפליקציה אחרת כמו וואטסאפ או אינסטגרם.</p>
+    </div>
+    <div class="note-row">
+      <span class="note-icon">📷</span>
+      <p>קיבלתם קוד <b>QR</b>? פשוט סרקו אותו והמשיכו הלאה.</p>
+    </div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab-btn" data-tab="iphone" id="tab-iphone" role="tab" aria-selected="false" aria-controls="panel-iphone">📱 iPhone</button>
+    <button type="button" class="tab-btn" data-tab="android" id="tab-android" role="tab" aria-selected="false" aria-controls="panel-android">🤖 Android</button>
+  </div>
+
+  <section class="platform" id="panel-iphone" role="tabpanel" aria-labelledby="tab-iphone" hidden>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num" style="background:var(--iphone)">1</span>
+        <p class="step-plat">iPhone</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>פתחו את תפריט הדפדפן</h2>
+          <p>בתחתית המסך, הקישו על שלוש הנקודות ליד שורת הכתובת</p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/iphone-step1.jpg" alt="צילום מסך: הקשה על שלוש הנקודות בתחתית הדפדפן"></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num" style="background:var(--iphone)">2</span>
+        <p class="step-plat">iPhone</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>הקישו על "שיתוף"</h2>
+          <p>בתפריט שנפתח, בחרו באפשרות <b>"שיתוף"</b></p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/iphone-step2.jpg" alt="צילום מסך: הקשה על שיתוף בתפריט"></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num" style="background:var(--iphone)">3</span>
+        <p class="step-plat">iPhone</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>גללו לעוד אפשרויות</h2>
+          <p>בתחתית חלון השיתוף, הקישו על <b>"הצגת עוד"</b></p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/iphone-step3.jpg" alt="צילום מסך: הקשה על הצגת עוד בחלון השיתוף"></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num" style="background:var(--iphone)">4</span>
+        <p class="step-plat">iPhone</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>בחרו "הוספה למסך הבית"</h2>
+          <p>מצאו ברשימה את האפשרות הזו והקישו עליה — בשלב הקצר שיופיע אחר כך, פשוט הקישו על "הוספה" לאישור</p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/iphone-step4.jpg" alt="צילום מסך: הקשה על הוספה למסך הבית"></div>
+      </div>
+    </div>
+
+    <div class="step done">
+      <div class="step-head">
+        <span class="step-num">✓</span>
+        <p class="step-plat">iPhone</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>האייקון מוכן במסך הבית!</h2>
+          <p>מעכשיו אפשר לפתוח את האפליקציה ישירות מהאייקון, בדיוק כמו כל אפליקציה אחרת</p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/iphone-step5.jpg" alt="צילום מסך: מסך הבית עם האייקון החדש, עם חץ שמצביע עליו"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="platform" id="panel-android" role="tabpanel" aria-labelledby="tab-android" hidden>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num" style="background:var(--android)">1</span>
+        <p class="step-plat">Android</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>הוסיפו למסך הבית</h2>
+          <ul class="bullets">
+            <li>בדרך כלל יופיע כפתור <b>"הוסף למסך הבית"</b> ישירות באתר — פשוט הקישו עליו</li>
+            <li>אם לא, אפשר גם דרך תפריט שלוש הנקודות בפינת הדפדפן, ולבחור שם <b>"הוספה למסך הבית"</b> או <b>"התקן"</b></li>
+          </ul>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/android-step1.jpg" alt="צילום מסך: כפתור הוסף למסך הבית באתר"></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <span class="step-num" style="background:var(--android)">2</span>
+        <p class="step-plat">Android</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>אשרו את ההתקנה</h2>
+          <p>יופיע חלון קצר לאישור — הקישו על הכפתור כדי להתקין</p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/android-step2.jpg" alt="צילום מסך: חלון אישור ההתקנה"></div>
+      </div>
+    </div>
+
+    <div class="step done">
+      <div class="step-head">
+        <span class="step-num">✓</span>
+        <p class="step-plat">Android</p>
+      </div>
+      <div class="step-body">
+        <div class="step-text">
+          <h2>האייקון מוכן במסך הבית!</h2>
+          <p>מעכשיו אפשר לפתוח את האפליקציה ישירות מהאייקון, בדיוק כמו כל אפליקציה אחרת</p>
+        </div>
+        <div class="step-img-wrap"><img src="assets/install-guide/android-step3.jpg" alt="צילום מסך: מסך הבית עם האייקון החדש"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="card tips">
+    <h2>לא רואים את הכפתור? כמה טיפים</h2>
+    <div class="tip">
+      <span class="tip-icon warn">⚠️</span>
+      <p>נפתח מתוך הודעה או רשת חברתית? יש להעתיק את הקישור ולפתוח אותו ישירות בדפדפן</p>
+    </div>
+    <div class="tip">
+      <span class="tip-icon net">🌐</span>
+      <p>אל תשתמשו בדפדפן הפנימי של אפליקציה אחרת — חשוב להשתמש בדפדפן עצמו (Safari או Chrome)</p>
+    </div>
+    <div class="tip">
+      <span class="tip-icon ok">✅</span>
+      <p>אחרי ההתקנה, האפליקציה תיפתח למסך מלא — בלי סרגלי דפדפן, בדיוק כמו אפליקציה רגילה</p>
+    </div>
+  </section>
+
+  <footer class="closing">
+    <p class="closing-emoji">🎉</p>
+    <h2>סיימתם!</h2>
+    <p class="lede">יש שאלות? אנחנו כאן לעזור</p>
+    <div class="contact-card">
+      <p class="contact-name">יאיר אורון</p>
+      <p class="contact-line">yair.oron@gmail.com</p>
+      <p class="contact-line">support@barber-app.com</p>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var panels = { iphone: document.getElementById('panel-iphone'), android: document.getElementById('panel-android') };
+  var btns = { iphone: document.getElementById('tab-iphone'), android: document.getElementById('tab-android') };
+
+  function showTab(name){
+    for (var k in panels){
+      panels[k].hidden = (k !== name);
+      btns[k].classList.toggle('active', k === name);
+      btns[k].setAttribute('aria-selected', k === name ? 'true' : 'false');
+    }
+    try{ localStorage.setItem('installGuidePlatform', name); }catch(e){}
+  }
+
+  btns.iphone.addEventListener('click', function(){ showTab('iphone'); });
+  btns.android.addEventListener('click', function(){ showTab('android'); });
+
+  var initial = 'iphone';
+  var ua = navigator.userAgent || '';
+  try{
+    var saved = localStorage.getItem('installGuidePlatform');
+    if (saved === 'android' || saved === 'iphone'){ initial = saved; }
+    else if (/android/i.test(ua)){ initial = 'android'; }
+  }catch(e){
+    if (/android/i.test(ua)){ initial = 'android'; }
+  }
+  showTab(initial);
+})();
+</script>
+</body>
+</html>

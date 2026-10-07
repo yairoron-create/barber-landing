@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /broadcast-builder.html
+Disallow: /add-to-home-screen.html
 
 Sitemap: https://barber-app.com/sitemap.xml
