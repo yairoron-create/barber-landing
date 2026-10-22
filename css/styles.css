@@ -246,6 +246,8 @@ h1, h2 {
   color: var(--text-on-dark-muted);
 }
 .trust-badges li::marker { content: ''; }
+.trust-badges a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.trust-badges a:hover { color: var(--gold-light); }
 
 /* ----- Hero visual / phone mockup ----- */
 .hero-visual {
@@ -765,6 +767,49 @@ h1, h2 {
   border-radius: 999px;
 }
 
+/* ===== Pet-grooming showcase section ===== */
+.grooming {
+  background: radial-gradient(ellipse at top right, #23252e 0%, var(--bg-dark) 45%, var(--bg-darker) 100%);
+  color: var(--text-on-dark);
+}
+.grooming-inner {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 56px;
+  align-items: center;
+}
+.grooming h2 { color: var(--text-on-dark); text-align: start; }
+.grooming .eyebrow {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: rgba(212, 175, 55, 0.65);
+  color: #fff;
+}
+.grooming-sub {
+  color: var(--text-on-dark-muted);
+  font-size: 18px;
+  margin: 0 0 24px;
+}
+.grooming-points {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.grooming-points li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: var(--text-on-dark);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.grooming-points .gp-icon { font-size: 26px; line-height: 1.2; flex-shrink: 0; }
+.grooming-points strong { color: var(--gold-light); }
+.grooming .btn-secondary { color: var(--gold-light); border-color: var(--gold-light); }
+.grooming .hero-actions { justify-content: flex-start; }
+.grooming-video .video-frame { margin: 0; }
+
 /* ===== Multi-barber section ===== */
 .multi-barber {
   background: radial-gradient(ellipse at top left, #23252e 0%, var(--bg-dark) 45%, var(--bg-darker) 100%);
@@ -1088,6 +1133,8 @@ h1, h2 {
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .hiw-grid { grid-template-columns: 1fr; }
   .mb-pillars { grid-template-columns: 1fr; }
+  .grooming-inner { grid-template-columns: 1fr; gap: 40px; }
+  .grooming .hero-actions { justify-content: center; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .video-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
