@@ -106,6 +106,11 @@ if (contactForm) {
 
 // ===== Scroll reveal animations =====
 const revealEls = document.querySelectorAll('.reveal');
+// Old browsers (Safari < 12.2) have no IntersectionObserver — without this guard the script throws
+// and every .reveal element (including the hero) stays at opacity:0 forever.
+if (!('IntersectionObserver' in window)) {
+  revealEls.forEach((el) => el.classList.add('is-visible'));
+} else {
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -118,3 +123,4 @@ const observer = new IntersectionObserver(
   { threshold: 0.15 }
 );
 revealEls.forEach((el) => observer.observe(el));
+}

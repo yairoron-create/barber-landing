@@ -50,6 +50,7 @@ h1, h2, h3 {
 }
 
 h1, h2 {
+  font-size: 34px; /* fallback for browsers without clamp() (Safari < 13.1) */
   font-size: clamp(28px, 4vw, 40px);
   text-align: center;
 }
@@ -217,6 +218,7 @@ h1, h2 {
 }
 
 .hero h1 {
+  font-size: 42px; /* fallback for browsers without clamp() */
   font-size: clamp(32px, 5vw, 52px);
   margin-bottom: 20px;
 }
@@ -511,6 +513,12 @@ h1, h2 {
   max-width: 320px;
   display: block;
   margin: 0 auto;
+}
+
+/* Fallback heights for browsers without aspect-ratio (Safari < 15): without it an iframe collapses to 150px */
+@supports not (aspect-ratio: 16 / 9) {
+  .video-frame iframe { height: 56vw; max-height: 480px; }
+  .video-frame.video-frame-portrait iframe { height: 569px; }
 }
 
 /* ===== Contact ===== */
