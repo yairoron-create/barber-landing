@@ -89,6 +89,17 @@ a { color: inherit; }
 .bp-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .bp-gallery img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); background: var(--cream-deep); display: block; }
 
+/* Team (shop page) */
+.bp-team { display: flex; flex-direction: column; gap: 14px; }
+.bp-member { display: grid; grid-template-columns: 56px 1fr; grid-template-areas: "av body" "btn btn"; gap: 6px 12px; align-items: center; padding-bottom: 14px; border-bottom: 1px dashed var(--border-light); }
+.bp-member:last-child { border-bottom: 0; padding-bottom: 0; }
+.bp-member-avatar { grid-area: av; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--cream-deep); }
+.bp-member-initials { display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; color: var(--gold-deep); }
+.bp-member-body { grid-area: body; min-width: 0; }
+.bp-member-name { font-weight: 700; }
+.bp-member-desc { color: var(--text-muted); font-size: .9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.bp-member .bp-chip { grid-area: btn; justify-self: start; }
+
 /* Skeleton / states */
 .bp-pulse { background: linear-gradient(90deg, var(--cream-deep), #fff, var(--cream-deep)); background-size: 200% 100%; animation: bp-shimmer 1.4s infinite linear; }
 .bp-skeleton .bp-avatar { border-color: var(--cream-deep); }
