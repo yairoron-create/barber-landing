@@ -1,3 +1,27 @@
+// ===== Entry-click alert to the app owner =====
+// Any click on a link that leads into the app sends one anonymous beacon (button label, page,
+// referrer, language) so the owner can get a push. Fire-and-forget; never delays navigation.
+(function () {
+  var APP = 'https://barber-appointments-vimn.onrender.com';
+  var ENDPOINT = APP + '/api/landing-click';
+  document.addEventListener('click', function (e) {
+    try {
+      var a = e.target && e.target.closest ? e.target.closest('a[href^="' + APP + '"]') : null;
+      if (!a) return;
+      var label = (a.textContent || '').replace(/[^֐-׿a-zA-Z0-9 '"\-\/]/g, '').replace(/\s+/g, ' ').trim();
+      var data = new URLSearchParams({
+        label: label,
+        path: location.pathname,
+        referrer: document.referrer || '',
+        lang: navigator.language || ''
+      });
+      if (!(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT, data))) {
+        fetch(ENDPOINT, { method: 'POST', body: data, keepalive: true, mode: 'no-cors' }).catch(function () {});
+      }
+    } catch (err) { /* never block navigation */ }
+  }, true);
+})();
+
 // ===== Footer year =====
 document.getElementById('year').textContent = new Date().getFullYear();
 
