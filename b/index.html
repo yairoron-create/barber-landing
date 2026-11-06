@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קביעת תור – תור-Q</title>
+  <!-- Public barber page: content is pulled live from the app's public API by ../js/barber-page.js
+       (barber-app.com/b/?id=<barberId>). Not meant to be indexed by search engines. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="../assets/icon.svg" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/barber-page.css?v=2" />
+</head>
+<body>
+  <main class="bp" id="bp">
+    <!-- Skeleton shown immediately, replaced once the data arrives -->
+    <section class="bp-hero bp-skeleton" id="bpSkeleton" aria-busy="true">
+      <div class="bp-avatar bp-pulse"></div>
+      <div class="bp-line bp-pulse" style="width:60%"></div>
+      <div class="bp-line bp-pulse" style="width:80%"></div>
+      <p class="bp-wake" id="bpWake" hidden>טוענים את הפרטים… בפעם הראשונה זה עשוי לקחת עד חצי דקה.</p>
+    </section>
+    <div id="bpContent" hidden></div>
+    <section class="bp-state" id="bpError" hidden>
+      <h1 id="bpErrorTitle">לא הצלחנו לטעון את העמוד</h1>
+      <p id="bpErrorText">נסו לרענן את הדף בעוד רגע.</p>
+      <button type="button" class="bp-btn bp-btn-ghost" id="bpRetry">נסו שוב</button>
+    </section>
+  </main>
+
+  <footer class="bp-footer">
+    <a href="https://barber-app.com/" target="_blank" rel="noopener">מופעל על ידי <strong>תור-Q</strong></a>
+  </footer>
+
+  <!-- Sticky booking bar (filled by JS) -->
+  <div class="bp-cta-bar" id="bpCtaBar" hidden>
+    <p class="bp-cta-hint">הירשמו כדי לקבל תזכורת לפני התור ולנהל את התורים שלכם בקלות</p>
+    <a class="bp-btn bp-btn-primary" id="bpCta" href="#">קבעו תור</a>
+  </div>
+
+  <script src="../js/barber-page.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* Public barber page (barber-app.com/b/?id=...). Self-contained: does not load styles.css. */
+:root {
+  --gold: #d4af37;
+  --gold-deep: #b8932b;
+  --cream: #faf6ee;
+  --cream-deep: #f1e9da;
+  --text-dark: #1c1d22;
+  --text-muted: #6b6d78;
+  --border-light: #e8e2d4;
+  --bg-dark: #15161c;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 10px 30px rgba(20, 20, 30, 0.08);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Heebo', 'Segoe UI', Tahoma, sans-serif;
+  color: var(--text-dark);
+  background: var(--cream);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+.bp { max-width: 640px; margin: 0 auto; padding: 0 16px 150px; }
+h1, h2 { margin: 0 0 12px; line-height: 1.25; }
+h2 { font-size: 1.15rem; font-weight: 800; }
+a { color: inherit; }
+
+/* Buttons (explicit resets: nothing global here) */
+.bp-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+  border-radius: 999px; padding: 12px 22px; border: 2px solid transparent;
+}
+.bp-btn-primary { background: var(--gold); color: var(--bg-dark); width: 100%; font-size: 1.1rem; padding: 14px 22px; }
+.bp-btn-primary:active { background: var(--gold-deep); }
+.bp-btn-ghost { background: transparent; border-color: var(--border-light); color: var(--text-dark); }
+
+/* Hero */
+.bp-hero { text-align: center; padding: 40px 0 20px; }
+.bp-avatar {
+  width: 112px; height: 112px; border-radius: 50%; object-fit: cover;
+  margin: 0 auto 14px; display: block; background: var(--cream-deep);
+  border: 3px solid var(--gold);
+}
+.bp-hero h1 { font-size: 1.6rem; font-weight: 800; }
+.bp-desc { color: var(--text-muted); margin: 0 auto; max-width: 46ch; }
+
+/* Promotion */
+.bp-promo {
+  background: #fff8e1; border: 1px solid var(--gold); border-radius: var(--radius-sm);
+  padding: 12px 16px; margin: 8px 0 20px; font-weight: 700; text-align: center;
+}
+
+/* Cards */
+.bp-card {
+  background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius);
+  box-shadow: var(--shadow-soft); padding: 18px; margin: 0 0 16px;
+}
+
+/* Services */
+.bp-cat { font-size: .85rem; font-weight: 700; color: var(--gold-deep); margin: 14px 0 4px; letter-spacing: .02em; }
+.bp-cat:first-of-type { margin-top: 0; }
+.bp-svc { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--border-light); }
+.bp-svc:last-child { border-bottom: 0; }
+.bp-svc-name { font-weight: 500; }
+.bp-svc-price { font-weight: 700; white-space: nowrap; color: var(--text-dark); }
+.bp-svc-price.note { font-weight: 500; color: var(--text-muted); font-size: .92rem; white-space: normal; text-align: left; }
+.bp-svc-extra { color: var(--text-muted); font-size: .85rem; }
+
+/* Hours */
+.bp-hours { display: grid; grid-template-columns: auto 1fr; gap: 4px 18px; margin: 0; }
+.bp-hours dt { font-weight: 500; }
+.bp-hours dd { margin: 0; color: var(--text-muted); }
+.bp-hours .today { color: var(--text-dark); font-weight: 800; }
+
+/* Contact rows */
+.bp-contact { display: flex; flex-direction: column; gap: 10px; }
+.bp-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bp-row-label { font-weight: 500; flex: 1 1 100%; }
+.bp-chip {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+  background: var(--cream-deep); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: .95rem;
+}
+
+/* Gallery: lazy, small thumbnails only */
+.bp-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.bp-gallery img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); background: var(--cream-deep); display: block; }
+
+/* Skeleton / states */
+.bp-pulse { background: linear-gradient(90deg, var(--cream-deep), #fff, var(--cream-deep)); background-size: 200% 100%; animation: bp-shimmer 1.4s infinite linear; }
+.bp-skeleton .bp-avatar { border-color: var(--cream-deep); }
+.bp-line { height: 16px; border-radius: 8px; margin: 12px auto; }
+.bp-wake { color: var(--text-muted); font-size: .95rem; margin-top: 18px; }
+@keyframes bp-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.bp-state { text-align: center; padding: 60px 0; }
+.bp-state p { color: var(--text-muted); }
+
+/* Footer + sticky CTA */
+.bp-footer { text-align: center; padding: 8px 16px 140px; color: var(--text-muted); font-size: .85rem; }
+.bp-footer a { text-decoration: none; }
+.bp-cta-bar {
+  position: fixed; inset-inline: 0; bottom: 0; z-index: 10;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(250, 246, 238, .96); backdrop-filter: blur(6px);
+  border-top: 1px solid var(--border-light);
+}
+.bp-cta-hint { margin: 0 auto 8px; max-width: 608px; text-align: center; font-size: .85rem; color: var(--text-muted); line-height: 1.4; }
+.bp-cta-bar .bp-btn { max-width: 608px; margin: 0 auto; display: flex; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .bp-pulse { animation: none; } html { scroll-behavior: auto; } }
