@@ -547,18 +547,18 @@
 
         <div class="form-row form-row-triple">
           <div class="form-group">
-            <input type="text" id="contactName" name="name" required aria-label="שם מלא" placeholder="שם מלא" />
+            <input type="text" id="contactName" name="name" maxlength="60" required aria-label="שם מלא" placeholder="שם מלא" />
           </div>
           <div class="form-group">
-            <input type="tel" id="contactPhone" name="phone" required aria-label="טלפון" placeholder="טלפון" />
+            <input type="tel" id="contactPhone" name="phone" maxlength="20" inputmode="tel" required aria-label="טלפון" placeholder="טלפון" />
           </div>
           <div class="form-group">
-            <input type="email" id="contactEmail" name="email" aria-label="אימייל (אופציונלי)" placeholder="אימייל (אופציונלי)" />
+            <input type="email" id="contactEmail" name="email" maxlength="100" aria-label="אימייל (אופציונלי)" placeholder="אימייל (אופציונלי)" />
           </div>
         </div>
 
         <div class="form-group">
-          <textarea id="contactMessage" name="message" rows="3" required aria-label="הודעה" placeholder="כתבו את שאלתכם כאן..."></textarea>
+          <textarea id="contactMessage" name="message" rows="3" maxlength="1000" required aria-label="הודעה" placeholder="כתבו את שאלתכם כאן..."></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary btn-small" id="contactSubmitBtn">שליחה</button>
