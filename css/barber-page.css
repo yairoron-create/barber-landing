@@ -114,6 +114,8 @@ a { color: inherit; }
 /* Footer + sticky CTA */
 .bp-footer { text-align: center; padding: 8px 16px 140px; color: var(--text-muted); font-size: .85rem; }
 .bp-footer a { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.bp-legal { margin: 8px 0 0; font-size: .75rem; }
+.bp-legal a { color: var(--text-muted); text-decoration: underline; opacity: .85; }
 .bp-footer-logo { width: 20px; height: 20px; border-radius: 5px; }
 .bp-cta-bar {
   position: fixed; inset-inline: 0; bottom: 0; z-index: 10;
