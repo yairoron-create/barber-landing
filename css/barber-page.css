@@ -93,11 +93,13 @@ a { color: inherit; }
 .bp-team { display: flex; flex-direction: column; gap: 14px; }
 .bp-member { display: grid; grid-template-columns: 56px 1fr; grid-template-areas: "av body" "btn btn"; gap: 6px 12px; align-items: center; padding-bottom: 14px; border-bottom: 1px dashed var(--border-light); }
 .bp-member:last-child { border-bottom: 0; padding-bottom: 0; }
-.bp-member-avatar { grid-area: av; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--cream-deep); }
+.bp-member-avatar { grid-area: av; align-self: start; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: var(--cream-deep); }
 .bp-member-initials { display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; color: var(--gold-deep); }
 .bp-member-body { grid-area: body; min-width: 0; }
 .bp-member-name { font-weight: 700; }
 .bp-member-desc { color: var(--text-muted); font-size: .9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.bp-member-desc-open { display: block; -webkit-line-clamp: unset; overflow: visible; }
+.bp-more { background: none; border: 0; padding: 4px 0 0; font: inherit; font-size: .85rem; font-weight: 700; color: var(--gold-deep); text-decoration: underline; cursor: pointer; }
 .bp-member .bp-chip { grid-area: btn; justify-self: start; }
 
 /* Skeleton / states */

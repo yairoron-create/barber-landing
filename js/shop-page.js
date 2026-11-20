@@ -89,6 +89,24 @@
 
     // Booking CTA -> the app's shop page (the customer picks a team member there)
     B.showContent(B.APP + '/?shop=' + encodeURIComponent(shopId));
+    addReadMore(); // needs the content visible to measure whether the text is cut
+  }
+
+  // Team bios are clamped to 3 lines; add a "read more" toggle only where text is actually cut.
+  function addReadMore() {
+    var descs = document.querySelectorAll('.bp-member-desc');
+    Array.prototype.forEach.call(descs, function (d) {
+      if (d.scrollHeight <= d.clientHeight + 1) return;
+      var btn = B.el('button', 'bp-more', 'קרא עוד');
+      btn.type = 'button';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function () {
+        var open = d.classList.toggle('bp-member-desc-open');
+        btn.textContent = open ? 'הצג פחות' : 'קרא עוד';
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      d.parentNode.appendChild(btn);
+    });
   }
 
   function load() {
