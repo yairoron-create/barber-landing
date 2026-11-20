@@ -203,6 +203,7 @@
   }
   function showContent(ctaHref) {
     $('bpCta').href = ctaHref;
+    $('bpCtaMine').href = ctaHref;
     $('bpCtaBar').hidden = false;
     $('bpSkeleton').hidden = true;
     $('bpError').hidden = true;
@@ -224,30 +225,10 @@
     });
   }
 
-  // Entry-click alert to the app owner (same beacon as the main site).
-  function initBeacon(labelPrefix, pathSuffix) {
-    document.addEventListener('click', function (e) {
-      try {
-        var a = e.target && e.target.closest ? e.target.closest('a[href^="' + APP + '"]') : null;
-        if (!a) return;
-        var label = (a.textContent || '').replace(/[^֐-׿a-zA-Z0-9 '"\-\/]/g, '').replace(/\s+/g, ' ').trim();
-        var data = new URLSearchParams({
-          label: labelPrefix + ': ' + label,
-          path: location.pathname + pathSuffix,
-          referrer: document.referrer || '',
-          lang: navigator.language || ''
-        });
-        if (!(navigator.sendBeacon && navigator.sendBeacon(APP + '/api/landing-click', data))) {
-          fetch(APP + '/api/landing-click', { method: 'POST', body: data, keepalive: true, mode: 'no-cors' }).catch(function () {});
-        }
-      } catch (err) { /* never block navigation */ }
-    }, true);
-  }
-
   window.BPC = {
     APP: APP, $: $, el: el, ltr: ltr, link: link, card: card, cld: cld,
     renderHours: renderHours, promoActive: promoActive, renderServices: renderServices,
     renderContact: renderContact, renderGallery: renderGallery, heroAvatar: heroAvatar,
-    getJson: getJson, showError: showError, showContent: showContent, runLoad: runLoad, initBeacon: initBeacon
+    getJson: getJson, showError: showError, showContent: showContent, runLoad: runLoad
   };
 })();

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/barber-page.css?v=3" />
+  <link rel="stylesheet" href="../css/barber-page.css?v=5" />
 </head>
 <body>
   <main class="bp" id="bp">
@@ -38,10 +38,13 @@
   <!-- Sticky booking bar (filled by JS) -->
   <div class="bp-cta-bar" id="bpCtaBar" hidden>
     <p class="bp-cta-hint">הירשמו כדי לקבל תזכורת לפני התור ולנהל את התורים שלכם בקלות</p>
-    <a class="bp-btn bp-btn-primary" id="bpCta" href="#">קבעו תור</a>
+    <div class="bp-cta-row">
+      <a class="bp-btn bp-btn-primary" id="bpCta" href="#">קבעו תור</a>
+      <a class="bp-btn bp-btn-ghost" id="bpCtaMine" href="#">התורים שלך</a>
+    </div>
   </div>
 
-  <script src="../js/page-common.js?v=1"></script>
-  <script src="../js/barber-page.js?v=2"></script>
+  <script src="../js/page-common.js?v=2"></script>
+  <script src="../js/barber-page.js?v=3"></script>
 </body>
 </html>

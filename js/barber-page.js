@@ -49,7 +49,6 @@
     }, function (r) { render(r[0], (r[1] && r[1].services) || []); });
   }
 
-  B.initBeacon('עמוד ספר', '?id=' + barberId.slice(-6));
   B.$('bpRetry').addEventListener('click', load);
   if (!/^[a-f0-9]{24}$/i.test(barberId)) B.showError('העמוד לא נמצא', 'הקישור אינו תקין.', false);
   else load();
